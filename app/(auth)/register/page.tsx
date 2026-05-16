@@ -79,7 +79,7 @@ export default function RegisterPage() {
       }
 
       // Step 3: Redirect to account dashboard
-      router.push('/account')
+      router.push('/my-account')
       router.refresh()
     } catch {
       setServerError('An unexpected error occurred. Please try again.')

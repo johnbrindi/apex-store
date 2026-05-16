@@ -41,11 +41,30 @@ export default function ShopClient({ searchParams, categorySlug, categoryName }:
     let result = [...products]
 
     if (selectedCategories.length > 0) {
-      result = result.filter((p) =>
-        selectedCategories.some(
-          (slug) => p.category?.slug === slug || p.category_id === slug
-        )
-      )
+      result = result.filter((p) => {
+        // Find the categories that match the selected slugs
+        const matchingCatIds = new Set<string>()
+        selectedCategories.forEach(slug => {
+          // Check top-level
+          const cat = categories.find(c => c.slug === slug)
+          if (cat) {
+            matchingCatIds.add(cat.id)
+            // If we selected a parent, include all its children
+            cat.children?.forEach(child => matchingCatIds.add(child.id))
+          }
+          // Check children directly
+          categories.forEach(parent => {
+            const child = parent.children?.find(c => c.slug === slug)
+            if (child) {
+              matchingCatIds.add(child.id)
+              // Optionally include the parent as well if we want a product in parent category to show? 
+              // Usually products should belong strictly to child if child is selected.
+            }
+          })
+        })
+        
+        return p.category_id ? matchingCatIds.has(p.category_id) : false
+      })
     }
     if (inStockOnly) result = result.filter((p) => p.in_stock)
     if (onSaleOnly) result = result.filter((p) => p.is_on_sale)

@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
-import { createClient } from '@/utils/supabase/server'
+import { getLocalUser } from '@/actions/auth'
 import {
   LayoutDashboard, Package, ShoppingBag,
   Users, Tag, Settings, ChevronRight, BarChart3
@@ -8,8 +8,7 @@ import {
 import AdminSidebarClient from './AdminSidebarClient'
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
-  const supabase = createClient()
-  const { data: { user } } = await supabase.auth.getUser()
+  const user = await getLocalUser()
   if (!user) redirect('/login')
 
   return (

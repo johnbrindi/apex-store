@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
-import { createClient } from '@/utils/supabase/server'
+import { getLocalUser } from '@/actions/auth'
 import AnnouncementBar from '@/components/layout/AnnouncementBar'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
@@ -10,10 +10,9 @@ import SearchModal from '@/components/layout/SearchModal'
 import AccountSidebar from '@/components/account/AccountSidebar'
 
 export default async function AccountLayout({ children }: { children: React.ReactNode }) {
-  const supabase = createClient()
-  const { data: { user } } = await supabase.auth.getUser()
+  const user = await getLocalUser()
 
-  if (!user) redirect('/login?redirect=/account')
+  if (!user) redirect('/login?redirect=/my-account')
 
   return (
     <>

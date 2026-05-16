@@ -1,6 +1,7 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState, useEffect } from 'react'
+import { createClient } from '@/utils/supabase/client'
 import Link from 'next/link'
 import { X, ChevronDown, ChevronRight, User, Heart, ShoppingBag } from 'lucide-react'
 import { useUIStore } from '@/store/uiStore'
@@ -11,6 +12,15 @@ import { motion, AnimatePresence } from 'framer-motion'
 export default function MobileNav() {
   const { mobileNavOpen, closeMobileNav } = useUIStore()
   const [expanded, setExpanded] = useState<string | null>(null)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+    import('@/actions/auth').then(({ getLocalUser }) => {
+      getLocalUser().then((user) => setIsLoggedIn(!!user))
+    })
+  }, [])
 
   useEffect(() => {
     if (mobileNavOpen) {
@@ -65,9 +75,9 @@ export default function MobileNav() {
             {/* Quick links */}
             <div className="flex border-b border-border-light">
               {[
-                { href: '/account', icon: User, label: 'Account' },
-                { href: '/account/wishlist', icon: Heart, label: 'Wishlist' },
-                { href: '/account/orders', icon: ShoppingBag, label: 'Orders' },
+                { href: '/my-account', icon: User, label: 'Account' },
+                { href: '/my-account/wishlist', icon: Heart, label: 'Wishlist' },
+                { href: '/my-account/orders', icon: ShoppingBag, label: 'Orders' },
               ].map(({ href, icon: Icon, label }) => (
                 <Link
                   key={href}
@@ -154,11 +164,11 @@ export default function MobileNav() {
                 SHOP ALL PRODUCTS
               </Link>
               <Link
-                href="/login"
+                href={isLoggedIn ? "/my-account" : "/login"}
                 onClick={closeMobileNav}
                 className="flex items-center justify-center w-full py-3 border border-border-light text-text-primary hover:bg-surface-100 font-bold uppercase tracking-wider text-sm transition-colors"
               >
-                LOGIN / REGISTER
+                {mounted ? (isLoggedIn ? "MY ACCOUNT" : "LOGIN / REGISTER") : "LOGIN / REGISTER"}
               </Link>
             </div>
           </motion.aside>

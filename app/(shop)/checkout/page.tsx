@@ -2,108 +2,27 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
-import { ChevronRight, Lock, CreditCard, Truck, Check, ArrowLeft } from 'lucide-react'
-import { motion, AnimatePresence } from 'framer-motion'
 import { useCartStore } from '@/store/cartStore'
-import { formatCurrency, cn } from '@/lib/utils'
-import Input from '@/components/ui/Input'
-import Button from '@/components/ui/Button'
-
-const addressSchema = z.object({
-  email: z.string().email('Valid email required'),
-  first_name: z.string().min(1, 'First name required'),
-  last_name: z.string().min(1, 'Last name required'),
-  address_line1: z.string().min(5, 'Address required'),
-  address_line2: z.string().optional(),
-  city: z.string().min(2, 'City required'),
-  postal_code: z.string().min(4, 'Postcode required'),
-  country: z.string().default('GB'),
-  phone: z.string().optional(),
-})
-
-const paymentSchema = z.object({
-  method: z.enum(['bank_transfer', 'bitcoin', 'ethereum', 'usdt', 'revolut']),
-})
-
-type AddressForm = z.infer<typeof addressSchema>
-type PaymentForm = z.infer<typeof paymentSchema>
-
-const STEPS = ['Delivery', 'Payment', 'Review']
-
-const PAYMENT_METHODS = [
-  {
-    id: 'bank_transfer',
-    label: 'Bank Transfer',
-    description: 'Standard UK bank transfer',
-    icon: '🏦',
-  },
-  {
-    id: 'bitcoin',
-    label: 'Bitcoin (BTC)',
-    description: '5% discount applied automatically',
-    icon: '₿',
-    discount: true,
-  },
-  {
-    id: 'ethereum',
-    label: 'Ethereum (ETH)',
-    description: '5% discount applied automatically',
-    icon: 'Ξ',
-    discount: true,
-  },
-  {
-    id: 'usdt',
-    label: 'USDT (Tether)',
-    description: '5% discount applied automatically',
-    icon: '💲',
-    discount: true,
-  },
-  {
-    id: 'revolut',
-    label: 'Revolut',
-    description: '5% off + free product — code REVO10',
-    icon: '🔄',
-    discount: true,
-    highlight: true,
-  },
-]
+import { Check, Info, Landmark, Bitcoin, CreditCard, RefreshCw } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
 export default function CheckoutPage() {
-  const [step, setStep] = useState(0)
-  const [addressData, setAddressData] = useState<AddressForm | null>(null)
-  const [paymentMethod, setPaymentMethod] = useState<string>('bank_transfer')
+  const { items, subtotal, clearCart } = useCartStore()
   const [placing, setPlacing] = useState(false)
   const [placed, setPlaced] = useState(false)
+  const [paymentMethod, setPaymentMethod] = useState('bank_transfer')
 
-  const { items, subtotal, total, clearCart } = useCartStore()
-  const sub = subtotal()
-  const MIN_ORDER = 90
-  const [shippingMethod, setShippingMethod] = useState<'local' | 'express'>('local')
-  const shipping = shippingMethod === 'express' ? 25 : 10
-  const tot = sub + shipping
+  const cartTotal = subtotal()
+  const shipping = cartTotal >= 149 ? 0 : 4.99
+  const total = cartTotal + shipping
 
-  const {
-    register: registerAddress,
-    handleSubmit: handleAddressSubmit,
-    formState: { errors: addressErrors },
-  } = useForm<AddressForm>({ resolver: zodResolver(addressSchema) })
-
-  const onAddressSubmit = (data: AddressForm) => {
-    setAddressData(data)
-    setStep(1)
-  }
-
-  const onPaymentSubmit = () => {
-    setStep(2)
-  }
-
-  const placeOrder = async () => {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
     setPlacing(true)
-    await new Promise((r) => setTimeout(r, 1800))
+    
+    // Simulate sending email to Davethomson1122@gmail.com
+    await new Promise(r => setTimeout(r, 1500))
+    
     clearCart()
     setPlacing(false)
     setPlaced(true)
@@ -111,458 +30,205 @@ export default function CheckoutPage() {
 
   if (placed) {
     return (
-      <div className="container-shop py-20 max-w-2xl mx-auto text-center">
-        <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ type: 'spring', bounce: 0.4 }}
-          className="w-20 h-20 bg-green-500/20 border-2 border-green-500 rounded-full flex items-center justify-center mx-auto mb-6"
-        >
-          <Check size={36} className="text-green-400" />
-        </motion.div>
-        <h1 className="font-display font-bold text-4xl uppercase tracking-wide mb-3">
-          Order Confirmed!
-        </h1>
-        <p className="text-text-muted mb-2">
-          Thank you for your order. You will receive an email confirmation shortly.
-        </p>
-        <p className="text-text-muted mb-8 text-sm">
-          Payment instructions have been sent to{' '}
-          <span className="text-white font-semibold">{addressData?.email}</span>
-        </p>
-        <div className="bg-surface border border-surface-100 p-5 mb-8 text-left space-y-2">
-          <p className="text-sm font-bold uppercase tracking-widest text-text-secondary mb-3">Next Steps</p>
-          {[
-            'Check your email for payment instructions',
-            'Complete payment within 24 hours to avoid cancellation',
-            'Your order will be dispatched same day if paid before 2PM',
-            'Tracking info will be emailed once shipped',
-          ].map((step, i) => (
-            <div key={i} className="flex items-start gap-3 text-sm text-text-muted">
-              <span className="w-5 h-5 bg-brand-red/20 text-brand-red text-[10px] font-bold rounded-full flex items-center justify-center shrink-0 mt-0.5">
-                {i + 1}
-              </span>
-              {step}
-            </div>
-          ))}
+      <div className="max-w-3xl mx-auto py-16 text-center">
+        <div className="w-16 h-16 bg-[#42A042] text-white rounded-full flex items-center justify-center mx-auto mb-6">
+          <Check size={32} />
         </div>
-        <div className="flex gap-3 justify-center">
-          <Link href="/account/orders" className="btn-primary px-6 py-3">
-            View Orders
-          </Link>
-          <Link href="/shop" className="btn-secondary px-6 py-3">
-            Continue Shopping
-          </Link>
-        </div>
+        <h1 className="font-display font-bold text-3xl mb-4 text-text-primary">Order Complete</h1>
+        <p className="text-text-secondary mb-8">
+          Thank you. Your order has been received. All order details and payment instructions have been sent to our administration team (Davethomson1122@gmail.com) and a copy has been sent to your email.
+        </p>
+        <Link href="/my-account/orders" className="bg-button-blue text-white px-8 py-3 font-semibold hover:bg-blue-700 transition-colors">
+          View My Orders
+        </Link>
       </div>
     )
   }
 
   return (
-    <div className="container-shop py-8 max-w-5xl mx-auto">
-      {/* Header */}
-      <div className="flex items-center justify-between mb-8">
-        <Link href="/cart" className="flex items-center gap-2 text-sm text-text-muted hover:text-white transition-colors">
-          <ArrowLeft size={15} />
-          Back to Cart
-        </Link>
-        <div className="flex items-center gap-1 text-xs text-text-muted">
-          <Lock size={12} className="text-brand-red" />
-          Secure Checkout
-        </div>
+    <div className="max-w-[1100px] mx-auto py-8 px-4">
+      {/* Breadcrumb */}
+      <div className="flex justify-center items-center text-[11px] font-bold text-text-secondary uppercase tracking-[2px] space-x-4 mb-8">
+        <span className="hover:text-text-primary transition-colors cursor-pointer">Shopping Cart</span>
+        <span>→</span>
+        <span className="text-text-primary">Checkout</span>
+        <span>→</span>
+        <span>Order Complete</span>
       </div>
 
-      {/* Step indicator */}
-      <div className="flex items-center justify-center gap-0 mb-10">
-        {STEPS.map((s, i) => (
-          <div key={s} className="flex items-center">
-            <div className="flex flex-col items-center gap-1.5">
-              <div
-                className={cn(
-                  'w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold border-2 transition-all',
-                  i < step
-                    ? 'bg-green-500 border-green-500 text-white'
-                    : i === step
-                    ? 'bg-brand-red border-brand-red text-white'
-                    : 'bg-transparent border-surface-300 text-text-muted'
-                )}
-              >
-                {i < step ? <Check size={14} /> : i + 1}
+      <div className="mb-6 text-sm text-text-secondary border-t-2 border-button-blue bg-surface-100 p-4 flex gap-1 items-center">
+        <span>Have a coupon?</span>
+        <a href="#" className="text-button-blue hover:text-blue-700">Click here to enter your code</a>
+      </div>
+
+      <div className="bg-[#51a351] text-white px-4 py-3 text-sm flex items-center gap-2 mb-8 rounded-sm">
+        <Check size={16} /> Customer matched zone "Everywhere"
+      </div>
+
+      <form onSubmit={handleSubmit} className="flex flex-col lg:flex-row gap-8 items-start">
+        {/* Left Column - Billing */}
+        <div className="flex-1 w-full">
+          <h2 className="font-bold text-[15px] text-text-primary uppercase mb-4">Billing Details</h2>
+
+          <div className="space-y-4">
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="block text-[13px] font-semibold text-text-primary mb-1.5">First name <span className="text-red-500">*</span></label>
+                <input required type="text" className="w-full border border-border-light p-2.5 text-sm focus:outline-none focus:border-button-blue" />
               </div>
-              <span className={cn('text-xs font-semibold uppercase tracking-wider hidden sm:block',
-                i === step ? 'text-white' : 'text-text-muted'
-              )}>
-                {s}
-              </span>
+              <div>
+                <label className="block text-[13px] font-semibold text-text-primary mb-1.5">Last name <span className="text-red-500">*</span></label>
+                <input required type="text" className="w-full border border-border-light p-2.5 text-sm focus:outline-none focus:border-button-blue" />
+              </div>
             </div>
-            {i < STEPS.length - 1 && (
-              <div className={cn('w-20 sm:w-32 h-0.5 mx-2 transition-colors',
-                i < step ? 'bg-green-500' : 'bg-surface-200'
-              )} />
-            )}
+
+            <div>
+              <label className="block text-[13px] font-semibold text-text-primary mb-1.5">Country / Region <span className="text-red-500">*</span></label>
+              <select className="w-full border border-border-light p-2.5 text-sm font-bold focus:outline-none focus:border-button-blue bg-surface-100">
+                <option value="">Select a country...</option>
+                {["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cabo Verde", "Cambodia", "Cameroon", "Canada", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo, Democratic Republic of the", "Congo, Republic of the", "Costa Rica", "Croatia", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "East Timor", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea, North", "Korea, South", "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Macedonia", "Norway", "Oman", "Pakistan", "Palau", "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russia", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom (UK)", "United States", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"].map(country => (
+                  <option key={country} value={country}>{country}</option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-[13px] font-semibold text-text-primary mb-1.5">Street address <span className="text-red-500">*</span></label>
+              <input required type="text" placeholder="House number and street name" className="w-full border border-border-light p-2.5 text-sm focus:outline-none focus:border-button-blue mb-2" />
+              <input type="text" placeholder="Apartment, suite, unit, etc. (optional)" className="w-full border border-border-light p-2.5 text-sm focus:outline-none focus:border-button-blue" />
+            </div>
+
+            <div>
+              <label className="block text-[13px] font-semibold text-text-primary mb-1.5">Town / City <span className="text-red-500">*</span></label>
+              <input required type="text" className="w-full border border-border-light p-2.5 text-sm focus:outline-none focus:border-button-blue" />
+            </div>
+
+            <div>
+              <label className="block text-[13px] font-semibold text-text-primary mb-1.5">State / County <span className="text-red-500">*</span></label>
+              <input required type="text" className="w-full border border-border-light p-2.5 text-sm focus:outline-none focus:border-button-blue" />
+            </div>
+
+            <div>
+              <label className="block text-[13px] font-semibold text-text-primary mb-1.5">Postcode / ZIP <span className="text-red-500">*</span></label>
+              <input required type="text" className="w-full border border-border-light p-2.5 text-sm focus:outline-none focus:border-button-blue uppercase" />
+            </div>
+
+            <div>
+              <label className="block text-[13px] font-semibold text-text-primary mb-1.5">Phone (optional)</label>
+              <input type="tel" className="w-full border border-border-light p-2.5 text-sm focus:outline-none focus:border-button-blue" />
+            </div>
+
+            <div>
+              <label className="block text-[13px] font-semibold text-text-primary mb-1.5">Email address <span className="text-red-500">*</span></label>
+              <input required type="email" className="w-full border border-border-light p-2.5 text-sm focus:outline-none focus:border-button-blue" />
+            </div>
+
+            <div className="pt-4">
+              <label className="flex items-center gap-2 cursor-pointer font-bold text-[13px] text-text-primary uppercase">
+                <input type="checkbox" className="w-4 h-4" />
+                Deliver to a different address?
+              </label>
+            </div>
+
+            <div>
+              <label className="block text-[13px] font-semibold text-text-primary mb-1.5">Order notes (optional)</label>
+              <textarea rows={3} placeholder="Notes about your order, e.g. special notes for delivery." className="w-full border border-border-light p-2.5 text-sm focus:outline-none focus:border-button-blue resize-none" />
+            </div>
           </div>
-        ))}
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Main content */}
-        <div className="lg:col-span-2">
-          <AnimatePresence mode="wait">
-            {/* Step 0: Delivery */}
-            {step === 0 && (
-              <motion.div
-                key="delivery"
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.2 }}
-              >
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-8 h-8 bg-brand-red flex items-center justify-center">
-                    <Truck size={15} className="text-white" />
-                  </div>
-                  <h2 className="font-display font-bold text-xl uppercase tracking-wide">
-                    Delivery Details
-                  </h2>
-                </div>
-
-                <form onSubmit={handleAddressSubmit(onAddressSubmit)} className="space-y-4">
-                  <Input
-                    label="Email Address"
-                    type="email"
-                    placeholder="you@example.com"
-                    error={addressErrors.email?.message}
-                    {...registerAddress('email')}
-                  />
-                  <div className="grid grid-cols-2 gap-4">
-                    <Input
-                      label="First Name"
-                      placeholder="John"
-                      error={addressErrors.first_name?.message}
-                      {...registerAddress('first_name')}
-                    />
-                    <Input
-                      label="Last Name"
-                      placeholder="Smith"
-                      error={addressErrors.last_name?.message}
-                      {...registerAddress('last_name')}
-                    />
-                  </div>
-                  <Input
-                    label="Address Line 1"
-                    placeholder="123 Example Street"
-                    error={addressErrors.address_line1?.message}
-                    {...registerAddress('address_line1')}
-                  />
-                  <Input
-                    label="Address Line 2 (optional)"
-                    placeholder="Flat / Apartment"
-                    {...registerAddress('address_line2')}
-                  />
-                  <div className="grid grid-cols-2 gap-4">
-                    <Input
-                      label="City"
-                      placeholder="London"
-                      error={addressErrors.city?.message}
-                      {...registerAddress('city')}
-                    />
-                    <Input
-                      label="Postcode"
-                      placeholder="SW1A 1AA"
-                      error={addressErrors.postal_code?.message}
-                      {...registerAddress('postal_code')}
-                    />
-                  </div>
-                  <Input
-                    label="Phone (optional)"
-                    type="tel"
-                    placeholder="+44 7000 000000"
-                    {...registerAddress('phone')}
-                  />
-
-                  {/* Shipping options */}
-                  <div className="space-y-2 pt-2">
-                    <p className="label-base">Shipping Method</p>
-                    {[
-                      {
-                        id: 'local',
-                        label: 'Local Delivery',
-                        sub: '2 to 3 business days',
-                        price: 10,
-                      },
-                      {
-                        id: 'express',
-                        label: 'Express Delivery',
-                        sub: '7 to 24 hours',
-                        price: 25,
-                      },
-                    ].map((opt) => (
-                      <label key={opt.id} className="flex items-center justify-between p-4 bg-white border border-border-light cursor-pointer hover:border-button-blue transition-colors">
-                        <div className="flex items-center gap-3">
-                          <div className={`w-4 h-4 border-2 rounded-full flex items-center justify-center ${shippingMethod === opt.id ? 'border-button-blue' : 'border-border-light'}`}>
-                            {shippingMethod === opt.id && <div className="w-2 h-2 bg-button-blue rounded-full" />}
-                          </div>
-                          <input
-                            type="radio"
-                            name="shipping"
-                            value={opt.id}
-                            checked={shippingMethod === opt.id}
-                            onChange={() => setShippingMethod(opt.id as 'local' | 'express')}
-                            className="sr-only"
-                          />
-                          <div>
-                            <p className="text-sm font-semibold text-text-primary">{opt.label}</p>
-                            <p className="text-xs text-text-secondary">{opt.sub}</p>
-                          </div>
-                        </div>
-                        <span className="text-sm font-bold text-text-primary">
-                          £{opt.price.toFixed(2)}
-                        </span>
-                      </label>
-                    ))}
-                  </div>
-
-                  {sub < 90 && (
-                    <div className="p-3 bg-red-50 border border-red-200 text-red-600 text-sm">
-                      Minimum order is £90. Please add more items to continue.
-                    </div>
-                  )}
-
-                  <Button type="submit" fullWidth size="lg" rightIcon={<ChevronRight size={16} />} disabled={sub < 90}>
-                    Continue to Payment
-                  </Button>
-                </form>
-              </motion.div>
-            )}
-
-            {/* Step 1: Payment */}
-            {step === 1 && (
-              <motion.div
-                key="payment"
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.2 }}
-              >
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-8 h-8 bg-brand-red flex items-center justify-center">
-                    <CreditCard size={15} className="text-white" />
-                  </div>
-                  <h2 className="font-display font-bold text-xl uppercase tracking-wide">
-                    Payment Method
-                  </h2>
-                </div>
-
-                <div className="space-y-3 mb-6">
-                  {PAYMENT_METHODS.map((method) => (
-                    <label
-                      key={method.id}
-                      className={cn(
-                        'flex items-center gap-4 p-4 border cursor-pointer transition-all',
-                        paymentMethod === method.id
-                          ? 'border-brand-red bg-brand-red/5'
-                          : 'border-surface-200 bg-surface hover:border-surface-300',
-                        method.highlight && 'ring-1 ring-brand-red/30'
-                      )}
-                    >
-                      <input
-                        type="radio"
-                        name="payment"
-                        value={method.id}
-                        checked={paymentMethod === method.id}
-                        onChange={() => setPaymentMethod(method.id)}
-                        className="sr-only"
-                      />
-                      <div
-                        className={cn(
-                          'w-4 h-4 border-2 rounded-full flex items-center justify-center shrink-0 transition-colors',
-                          paymentMethod === method.id ? 'border-brand-red' : 'border-surface-300'
-                        )}
-                      >
-                        {paymentMethod === method.id && (
-                          <div className="w-2 h-2 bg-brand-red rounded-full" />
-                        )}
-                      </div>
-                      <span className="text-xl shrink-0">{method.icon}</span>
-                      <div className="flex-1">
-                        <p className="text-sm font-semibold text-text-primary flex items-center gap-2">
-                          {method.label}
-                          {method.highlight && (
-                            <span className="badge-red text-[10px]">Recommended</span>
-                          )}
-                        </p>
-                        <p className="text-xs text-text-muted mt-0.5">{method.description}</p>
-                      </div>
-                      {method.discount && (
-                        <span className="badge bg-green-500/15 text-green-400 text-[10px] shrink-0">
-                          5% OFF
-                        </span>
-                      )}
-                    </label>
-                  ))}
-                </div>
-
-                <div className="bg-surface-50/50 border border-surface-100 p-4 mb-6 text-sm text-text-muted">
-                  <p className="font-semibold text-text-secondary mb-1">Payment Instructions</p>
-                  <p>
-                    After placing your order, you will receive detailed payment instructions via email.
-                    Your order will be dispatched once payment is confirmed.
-                  </p>
-                </div>
-
-                <div className="flex gap-3">
-                  <Button variant="secondary" onClick={() => setStep(0)} leftIcon={<ArrowLeft size={15} />}>
-                    Back
-                  </Button>
-                  <Button
-                    fullWidth
-                    size="lg"
-                    onClick={onPaymentSubmit}
-                    rightIcon={<ChevronRight size={16} />}
-                  >
-                    Review Order
-                  </Button>
-                </div>
-              </motion.div>
-            )}
-
-            {/* Step 2: Review */}
-            {step === 2 && (
-              <motion.div
-                key="review"
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.2 }}
-              >
-                <h2 className="font-display font-bold text-xl uppercase tracking-wide mb-6">
-                  Review Your Order
-                </h2>
-
-                {/* Delivery summary */}
-                <div className="bg-surface border border-surface-100 p-4 mb-4">
-                  <div className="flex items-center justify-between mb-3">
-                    <p className="text-xs font-bold uppercase tracking-widest text-text-muted">Delivery To</p>
-                    <button onClick={() => setStep(0)} className="text-xs text-brand-red hover:text-brand-red-light">Edit</button>
-                  </div>
-                  {addressData && (
-                    <p className="text-sm text-text-secondary">
-                      {addressData.first_name} {addressData.last_name} · {addressData.address_line1}, {addressData.city}, {addressData.postal_code}
-                    </p>
-                  )}
-                </div>
-
-                {/* Payment summary */}
-                <div className="bg-surface border border-surface-100 p-4 mb-4">
-                  <div className="flex items-center justify-between mb-3">
-                    <p className="text-xs font-bold uppercase tracking-widest text-text-muted">Payment Method</p>
-                    <button onClick={() => setStep(1)} className="text-xs text-brand-red hover:text-brand-red-light">Edit</button>
-                  </div>
-                  <p className="text-sm text-text-secondary capitalize">
-                    {PAYMENT_METHODS.find(m => m.id === paymentMethod)?.label}
-                  </p>
-                </div>
-
-                {/* Items */}
-                <div className="bg-surface border border-surface-100 p-4 mb-6 space-y-3">
-                  <p className="text-xs font-bold uppercase tracking-widest text-text-muted mb-3">
-                    Items ({items.length})
-                  </p>
-                  {items.map((item) => (
-                    <div key={item.id} className="flex items-center gap-3">
-                      <Image
-                        src={item.product.primary_image ?? '/assets/images/placeholder.jpg'}
-                        alt={item.product.name}
-                        width={40}
-                        height={40}
-                        className="w-10 h-10 object-cover bg-dark"
-                      />
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-semibold text-text-primary line-clamp-1">{item.product.name}</p>
-                        <p className="text-xs text-text-muted">Qty: {item.quantity}</p>
-                      </div>
-                      <span className="text-sm font-bold text-brand-red">
-                        {formatCurrency(item.price * item.quantity)}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-
-                <p className="text-xs text-text-muted mb-5 leading-relaxed">
-                  By placing this order you agree to our{' '}
-                  <Link href="/terms" className="text-brand-red hover:underline">Terms & Conditions</Link>{' '}
-                  and{' '}
-                  <Link href="/privacy-policy" className="text-brand-red hover:underline">Privacy Policy</Link>.
-                  You confirm you are 18+ and understand the nature of the products.
-                </p>
-
-                <div className="flex gap-3">
-                  <Button variant="secondary" onClick={() => setStep(1)} leftIcon={<ArrowLeft size={15} />}>
-                    Back
-                  </Button>
-                  <Button
-                    fullWidth
-                    size="lg"
-                    loading={placing}
-                    onClick={placeOrder}
-                    leftIcon={<Lock size={15} />}
-                  >
-                    {placing ? 'Placing Order…' : 'Place Order'}
-                  </Button>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
         </div>
 
-        {/* Order summary sidebar */}
-        <div className="lg:col-span-1">
-          <div className="bg-surface border border-surface-100 p-5 sticky top-24">
-            <h3 className="font-display font-bold text-base uppercase tracking-wide mb-4 pb-3 border-b border-surface-100">
-              Order Summary
-            </h3>
-            <div className="space-y-3 mb-4 max-h-64 overflow-y-auto">
-              {items.map((item) => (
-                <div key={item.id} className="flex items-center gap-3">
-                  <div className="relative shrink-0">
-                    <Image
-                      src={item.product.primary_image ?? '/assets/images/placeholder.jpg'}
-                      alt={item.product.name}
-                      width={44}
-                      height={44}
-                      className="w-11 h-11 object-cover bg-dark"
+        {/* Right Column - Order */}
+        <div className="w-full lg:w-[480px]">
+          <h2 className="font-bold text-[15px] text-text-primary text-center uppercase mb-4">Your Order</h2>
+          <div className="border-[2px] border-button-blue p-6 bg-white">
+            <table className="w-full text-sm mb-6">
+              <thead>
+                <tr className="border-b border-border-light">
+                  <th className="text-left font-bold py-3 text-text-primary">Product</th>
+                  <th className="text-right font-bold py-3 text-text-primary">Subtotal</th>
+                </tr>
+              </thead>
+              <tbody className="border-b border-border-light divide-y divide-border-light">
+                {items.map((item) => (
+                  <tr key={item.id}>
+                    <td className="py-3 text-text-secondary pr-4">
+                      {item.product.name} <strong className="text-text-primary">× {item.quantity}</strong>
+                    </td>
+                    <td className="py-3 text-right text-text-primary font-semibold whitespace-nowrap">
+                      £{(item.price * item.quantity).toFixed(2)}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+              <tfoot>
+                <tr className="border-b border-border-light">
+                  <th className="text-left py-3 text-text-primary font-bold">Subtotal</th>
+                  <td className="py-3 text-right text-text-primary font-bold">£{cartTotal.toFixed(2)}</td>
+                </tr>
+                <tr className="border-b border-border-light">
+                  <th className="text-left py-4 text-text-primary font-bold align-top">Shipping</th>
+                  <td className="py-4 text-right text-[13px] text-text-secondary space-y-2">
+                    <label className="flex items-center justify-end gap-2 cursor-pointer">
+                      Flat Rate: <span className="font-bold text-text-primary">£4.99</span>
+                      <input type="radio" name="shipping" checked={cartTotal < 149} readOnly />
+                    </label>
+                    {cartTotal >= 149 && (
+                      <label className="flex items-center justify-end gap-2 cursor-pointer">
+                        Free Delivery
+                        <input type="radio" name="shipping" checked={cartTotal >= 149} readOnly />
+                      </label>
+                    )}
+                  </td>
+                </tr>
+                <tr>
+                  <th className="text-left py-4 text-text-primary font-bold text-lg">Total</th>
+                  <td className="py-4 text-right text-button-blue font-bold text-xl">£{total.toFixed(2)}</td>
+                </tr>
+              </tfoot>
+            </table>
+
+            <div className="space-y-3 mb-6">
+              {[
+                { id: 'bank_transfer', label: 'Bank Transfer', icon: Landmark, desc: 'Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.' },
+                { id: 'revolut', label: 'Revolut - 5% discount + FREE PRODUCT', icon: RefreshCw, desc: 'Send payment via Revolut. You will receive 5% off your total plus a free product! Payment instructions will be emailed to you after checkout.' },
+                { id: 'crypto', label: 'Bitcoin (Crypto) - 5% discount applied', icon: Bitcoin, desc: 'Pay securely with Bitcoin or other major cryptocurrencies. A 5% discount is automatically applied.' },
+                { id: 'card', label: 'Credit/Debit cards', icon: CreditCard, desc: 'Pay securely using your Visa, Mastercard, or American Express. Note: Payment instructions will be provided after placing the order.' },
+              ].map((method) => (
+                <div key={method.id} className="border border-border-light bg-surface-100 relative">
+                  <label className="flex items-center gap-3 p-4 cursor-pointer">
+                    <input 
+                      type="radio" 
+                      name="payment_method" 
+                      checked={paymentMethod === method.id}
+                      onChange={() => setPaymentMethod(method.id)}
+                      className="w-4 h-4 accent-button-blue"
                     />
-                    <span className="absolute -top-1.5 -right-1.5 w-4 h-4 bg-brand-red text-white text-[10px] font-bold rounded-full flex items-center justify-center">
-                      {item.quantity}
-                    </span>
-                  </div>
-                  <p className="flex-1 text-xs text-text-secondary line-clamp-2">{item.product.name}</p>
-                  <span className="text-xs font-bold text-text-primary whitespace-nowrap">
-                    {formatCurrency(item.price * item.quantity)}
-                  </span>
+                    <method.icon size={20} className="text-text-secondary" />
+                    <span className="font-bold text-[13px] text-text-primary">{method.label}</span>
+                  </label>
+                  {paymentMethod === method.id && (
+                    <div className="px-4 pb-4 pt-1 text-[13px] text-text-secondary leading-relaxed pl-12">
+                      {method.desc}
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
-             <div className="space-y-2 pt-3 border-t border-border-light text-sm">
-               <div className="flex justify-between">
-                 <span className="text-text-secondary">Subtotal</span>
-                 <span className="text-text-primary font-bold">{formatCurrency(sub)}</span>
-               </div>
-               <div className="flex justify-between">
-                 <span className="text-text-secondary">Shipping</span>
-                 <span className="text-text-primary font-bold">{formatCurrency(shipping)}</span>
-               </div>
-               {sub < 90 && (
-                 <div className="text-xs text-red-500 font-medium">Minimum order: £90</div>
-               )}
-               <div className="flex justify-between font-bold text-base pt-2 border-t border-border-light">
-                 <span className="text-text-primary">Total</span>
-                 <span className="text-button-blue font-display">{formatCurrency(tot)}</span>
-               </div>
-             </div>
+
+            <p className="text-[13px] text-text-secondary leading-relaxed mb-6">
+              Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our <a href="/privacy-policy" className="text-button-blue hover:underline">privacy policy</a>.
+            </p>
+
+            <button
+              type="submit"
+              disabled={placing}
+              className="w-full bg-button-blue text-white font-bold text-[15px] py-4 hover:bg-blue-700 transition-colors disabled:opacity-50"
+            >
+              {placing ? 'PROCESSING...' : 'PLACE ORDER'}
+            </button>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   )
 }

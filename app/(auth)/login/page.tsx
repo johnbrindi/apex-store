@@ -4,7 +4,7 @@ import { useState, Suspense } from 'react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Eye, EyeOff } from 'lucide-react'
-import { createClient } from '@/utils/supabase/client'
+import { registerLocalUser, loginLocalUser } from '@/actions/auth'
 
 function MyAccountPageContent() {
   const [regUsername, setRegUsername] = useState('')
@@ -25,6 +25,8 @@ function MyAccountPageContent() {
   const searchParams = useSearchParams()
   const justRegistered = searchParams.get('registered') === '1'
 
+  const redirectPath = searchParams.get('redirect') || '/my-account'
+
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!regUsername.trim() || !regEmail.trim() || !regPassword.trim()) {
@@ -35,28 +37,19 @@ function MyAccountPageContent() {
     setRegError('')
     setRegSuccess('')
     try {
-      const supabase = createClient()
-      const { error: signUpError } = await supabase.auth.signUp({
-        email: regEmail,
-        password: regPassword,
-        options: {
-          data: { username: regUsername, full_name: regUsername },
-          emailRedirectTo: undefined,
-        },
-      })
-      if (signUpError) {
-        setRegError(signUpError.message)
+      const formData = new FormData()
+      formData.append('username', regUsername)
+      formData.append('email', regEmail)
+      formData.append('password', regPassword)
+
+      const result = await registerLocalUser(formData)
+
+      if (result.error) {
+        setRegError(result.error)
         return
       }
-      const { error: signInError } = await supabase.auth.signInWithPassword({
-        email: regEmail,
-        password: regPassword,
-      })
-      if (signInError) {
-        setRegSuccess('Account created! Please check your email to confirm, then log in.')
-        return
-      }
-      router.push('/account')
+
+      router.push(redirectPath)
       router.refresh()
     } catch {
       setRegError('An error occurred. Please try again.')
@@ -70,16 +63,18 @@ function MyAccountPageContent() {
     setLoginLoading(true)
     setLoginError('')
     try {
-      const supabase = createClient()
-      const { error } = await supabase.auth.signInWithPassword({
-        email: loginEmail,
-        password: loginPassword,
-      })
-      if (error) {
-        setLoginError(error.message)
+      const formData = new FormData()
+      formData.append('email', loginEmail)
+      formData.append('password', loginPassword)
+
+      const result = await loginLocalUser(formData)
+
+      if (result.error) {
+        setLoginError(result.error)
         return
       }
-      router.push('/account')
+      
+      router.push(redirectPath)
       router.refresh()
     } catch {
       setLoginError('An error occurred. Please try again.')

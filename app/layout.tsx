@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import Providers from '@/components/Providers'
+import Script from 'next/script'
 
 export const metadata: Metadata = {
   title: {
@@ -81,6 +82,23 @@ export default function RootLayout({
         <Providers>
           {children}
         </Providers>
+
+        {/* Live Chat Widget (Tawk.to) */}
+        <Script id="tawk-live-chat" strategy="lazyOnload">
+          {`
+            var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+            (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            // NOTE FOR ADMIN: Replace this src link with your own Tawk.to Direct Chat Link!
+            // You can get yours for free at https://www.tawk.to/
+            s1.src='https://embed.tawk.to/6646543b981b6c5647715b9e/1hu11e3b6';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+            })();
+          `}
+        </Script>
       </body>
     </html>
   )

@@ -63,7 +63,7 @@ export default function ContactPage() {
             {
               icon: Mail,
               label: 'Email Support',
-              value: 'support@apexstore.co.uk',
+              value: 'Davethomson1122@gmail.com',
               sub: 'We reply within 24 hours',
             },
             {

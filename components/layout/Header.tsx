@@ -8,6 +8,7 @@ import { navigationItems } from '@/data/mock'
 import { cn } from '@/lib/utils'
 import { useState, useRef, useEffect } from 'react'
 import { formatCurrency } from '@/lib/utils'
+import { createClient } from '@/utils/supabase/client'
 
 export default function Header() {
   const { itemCount, subtotal, openCart } = useCartStore()
@@ -16,6 +17,15 @@ export default function Header() {
   const { openSearch, toggleMobileNav, mobileNavOpen } = useUIStore()
   const [activeNav, setActiveNav] = useState<string | null>(null)
   const [searchQuery, setSearchQuery] = useState('')
+  const [mounted, setMounted] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+    import('@/actions/auth').then(({ getLocalUser }) => {
+      getLocalUser().then((user) => setIsLoggedIn(!!user))
+    })
+  }, [])
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const handleMouseEnter = (label: string) => {
@@ -78,10 +88,10 @@ export default function Header() {
         <div className="flex items-center gap-3 shrink-0">
           {/* Login - hidden on very small screens */}
           <Link
-            href="/login"
+            href={isLoggedIn ? "/my-account" : "/login"}
             className="hidden sm:flex items-center gap-1 text-xs font-bold uppercase text-text-primary hover:text-brand-teal transition-colors whitespace-nowrap"
           >
-            LOGIN / REGISTER
+            {mounted ? (isLoggedIn ? "MY ACCOUNT" : "LOGIN / REGISTER") : "LOGIN / REGISTER"}
           </Link>
 
           {/* Cart */}
@@ -92,14 +102,14 @@ export default function Header() {
           >
             <div className="relative">
               <ShoppingBag size={22} />
-              {cartCount > 0 && (
+              {mounted && cartCount > 0 && (
                 <span className="absolute -top-1.5 -right-1.5 flex items-center justify-center w-4 h-4 bg-button-blue text-white text-[10px] rounded-full font-bold">
                   {cartCount}
                 </span>
               )}
             </div>
             <span className="hidden sm:block text-xs font-bold">
-              £{cartTotal.toFixed(2)}
+              £{mounted ? cartTotal.toFixed(2) : '0.00'}
             </span>
           </button>
         </div>

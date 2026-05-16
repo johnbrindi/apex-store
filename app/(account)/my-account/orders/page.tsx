@@ -105,7 +105,7 @@ export default function OrdersPage() {
                       {status.label}
                     </span>
                     <Link
-                      href={`/account/orders/${order.id}`}
+                      href={`/my-account/orders/${order.id}`}
                       className="flex items-center gap-1 text-xs font-semibold text-text-muted hover:text-white transition-colors"
                     >
                       Details <ChevronRight size={13} />

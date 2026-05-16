@@ -7,19 +7,18 @@ import {
   Settings, LogOut, User, ChevronRight
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { createClient } from '@/utils/supabase/client'
-import type { User as SupabaseUser } from '@supabase/supabase-js'
+import { logoutLocalUser } from '@/actions/auth'
 
 const navItems = [
-  { href: '/account', label: 'Dashboard', icon: LayoutDashboard, exact: true },
-  { href: '/account/orders', label: 'My Orders', icon: ShoppingBag },
-  { href: '/account/wishlist', label: 'Wishlist', icon: Heart },
-  { href: '/account/addresses', label: 'Addresses', icon: MapPin },
-  { href: '/account/settings', label: 'Settings', icon: Settings },
+  { href: '/my-account', label: 'Dashboard', icon: LayoutDashboard, exact: true },
+  { href: '/my-account/orders', label: 'My Orders', icon: ShoppingBag },
+  { href: '/my-account/wishlist', label: 'Wishlist', icon: Heart },
+  { href: '/my-account/addresses', label: 'Addresses', icon: MapPin },
+  { href: '/my-account/settings', label: 'Settings', icon: Settings },
 ]
 
 interface AccountSidebarProps {
-  user: SupabaseUser
+  user: any
 }
 
 export default function AccountSidebar({ user }: AccountSidebarProps) {
@@ -27,18 +26,12 @@ export default function AccountSidebar({ user }: AccountSidebarProps) {
   const router = useRouter()
 
   const handleLogout = async () => {
-    const supabase = createClient()
-    await supabase.auth.signOut()
+    await logoutLocalUser()
     router.push('/')
     router.refresh()
   }
 
-  const displayName =
-    user.user_metadata?.first_name
-      ? `${user.user_metadata.first_name} ${user.user_metadata.last_name ?? ''}`.trim()
-      : user.user_metadata?.username
-      ? user.user_metadata.username
-      : user.email?.split('@')[0] ?? 'Customer'
+  const displayName = user?.username ?? user?.email?.split('@')[0] ?? 'Customer'
 
   return (
     <aside className="w-full lg:w-60 shrink-0">
