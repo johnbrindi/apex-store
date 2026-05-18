@@ -1,140 +1,236 @@
 import type { Metadata } from 'next'
-import { ShoppingBag, Users, Package, TrendingUp, ArrowUp, ArrowDown, Clock, CheckCircle } from 'lucide-react'
+import Link from 'next/link'
+import {
+  ShoppingBag, Users, Package, TrendingUp,
+  ArrowUpRight, ArrowDownRight, LayoutDashboard,
+  ExternalLink, Tag, Plus
+} from 'lucide-react'
+import { products, categories } from '@/data/mock'
 
-export const metadata: Metadata = { title: 'Admin Dashboard' }
+export const metadata: Metadata = { title: 'Dashboard' }
 
-const stats = [
-  { label: 'Total Revenue', value: '£24,891', change: '+12.4%', up: true, icon: TrendingUp },
-  { label: 'Orders This Month', value: '183', change: '+8.1%', up: true, icon: ShoppingBag },
-  { label: 'Active Customers', value: '1,247', change: '+3.7%', up: true, icon: Users },
-  { label: 'Products in Stock', value: '1,032', change: '-2.1%', up: false, icon: Package },
-]
+// ── Live stats derived from real product data ──────────────────────────────────
+const totalProducts   = products.length
+const inStockCount    = products.filter(p => p.in_stock).length
+const featuredCount   = products.filter(p => p.is_featured).length
+const onSaleCount     = products.filter(p => p.is_on_sale).length
+const totalCategories = categories.length
+const avgPrice        = products.reduce((s, p) => s + p.price, 0) / products.length
+const topRated        = [...products].sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0)).slice(0, 5)
+const mostReviewed    = [...products].sort((a, b) => (b.review_count ?? 0) - (a.review_count ?? 0)).slice(0, 8)
 
-const recentOrders: any[] = [];
+// ── Reusable stat card ─────────────────────────────────────────────────────────
+function StatCard({
+  icon: Icon, label, value, sub, up, accent = '#1E73BE'
+}: {
+  icon: any; label: string; value: string | number; sub?: string; up?: boolean; accent?: string
+}) {
+  return (
+    <div
+      className="rounded-sm p-5 flex flex-col gap-3 border"
+      style={{ background: '#162130', borderColor: 'rgba(255,255,255,0.08)' }}
+    >
+      <div className="flex items-start justify-between">
+        <div
+          className="w-10 h-10 flex items-center justify-center rounded-sm"
+          style={{ background: `${accent}20`, border: `1px solid ${accent}40` }}
+        >
+          <Icon size={18} style={{ color: accent }} />
+        </div>
+        {up !== undefined && (
+          <span
+            className="flex items-center gap-0.5 text-[11px] font-bold"
+            style={{ color: up ? '#4ade80' : '#f87171' }}
+          >
+            {up ? <ArrowUpRight size={12} /> : <ArrowDownRight size={12} />}
+            {up ? 'Live' : 'Check'}
+          </span>
+        )}
+      </div>
+      <div>
+        <p className="font-display font-bold text-2xl text-white">{value}</p>
+        <p className="text-xs text-white/50 uppercase tracking-wider mt-0.5">{label}</p>
+        {sub && <p className="text-[11px] text-white/30 mt-1">{sub}</p>}
+      </div>
+    </div>
+  )
+}
 
-const topProducts = [
-  { name: 'Testosterone Enanthate 300', sold: 84, revenue: 3603.60 },
-  { name: 'Anavar 10mg Tablets', sold: 71, revenue: 3400.90 },
-  { name: 'Bulking Stack – Pro Series', sold: 38, revenue: 5696.20 },
-  { name: 'Clenbuterol 40mcg', sold: 63, revenue: 2135.70 },
-  { name: 'Nolvadex / Tamoxifen 20mg', sold: 55, revenue: 1974.50 },
-]
-
-const statusColors: Record<string, string> = {
-  pending: 'bg-yellow-500/20 text-yellow-400',
-  processing: 'bg-blue-500/20 text-blue-400',
-  shipped: 'bg-indigo-500/20 text-indigo-400',
-  delivered: 'bg-green-500/20 text-green-400',
-  cancelled: 'bg-red-500/20 text-red-400',
+// ── Section header ─────────────────────────────────────────────────────────────
+function SectionHeader({ title, href, linkLabel = 'View All' }: { title: string; href: string; linkLabel?: string }) {
+  return (
+    <div
+      className="flex items-center justify-between px-5 py-3.5 border-b"
+      style={{ borderColor: 'rgba(255,255,255,0.08)' }}
+    >
+      <h2 className="font-display font-bold text-sm uppercase tracking-widest text-white/90">
+        {title}
+      </h2>
+      <Link
+        href={href}
+        className="text-[11px] font-semibold transition-colors flex items-center gap-1"
+        style={{ color: '#1E73BE' }}
+      >
+        {linkLabel} <ExternalLink size={10} />
+      </Link>
+    </div>
+  )
 }
 
 export default function AdminDashboard() {
   return (
-    <div className="space-y-6">
-      {/* Header */}
-      <div className="flex items-center justify-between">
+    <div className="space-y-6 max-w-[1400px]">
+
+      {/* Page header */}
+      <div className="flex items-center gap-3 mb-2">
+        <LayoutDashboard size={20} style={{ color: '#1E73BE' }} />
         <div>
-          <h1 className="font-display font-bold text-2xl uppercase tracking-wide text-white">
+          <h1 className="font-display font-bold text-xl uppercase tracking-wide text-white">
             Dashboard
           </h1>
-          <p className="text-text-muted text-sm mt-0.5">
-            Welcome back — here&apos;s what&apos;s happening today.
+          <p className="text-white/40 text-xs mt-0.5">
+            Live overview — {totalProducts} products across {totalCategories} categories
           </p>
         </div>
-        <div className="flex items-center gap-2 text-sm text-text-muted bg-surface border border-surface-100 px-3 py-2">
-          <Clock size={14} className="text-brand-red" />
-          Last updated: just now
-        </div>
       </div>
 
-      {/* Stats grid */}
+      {/* ── Stats Grid ─────────────────────────────────────────────── */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        {stats.map(({ label, value, change, up, icon: Icon }) => (
-          <div key={label} className="bg-surface border border-surface-100 p-5">
-            <div className="flex items-start justify-between mb-3">
-              <div className="w-9 h-9 bg-brand-red/10 border border-brand-red/20 flex items-center justify-center">
-                <Icon size={16} className="text-brand-red" />
-              </div>
-              <span className={`flex items-center gap-0.5 text-xs font-bold ${up ? 'text-green-400' : 'text-red-400'}`}>
-                {up ? <ArrowUp size={11} /> : <ArrowDown size={11} />}
-                {change}
-              </span>
-            </div>
-            <p className="font-display font-bold text-2xl text-white">{value}</p>
-            <p className="text-xs text-text-muted mt-0.5 uppercase tracking-wider">{label}</p>
-          </div>
-        ))}
+        <StatCard
+          icon={Package}
+          label="Total Products"
+          value={totalProducts}
+          sub={`${inStockCount} in stock`}
+          up={true}
+          accent="#1E73BE"
+        />
+        <StatCard
+          icon={Tag}
+          label="On Sale"
+          value={onSaleCount}
+          sub={`${featuredCount} featured`}
+          up={true}
+          accent="#f59e0b"
+        />
+        <StatCard
+          icon={TrendingUp}
+          label="Avg. Price"
+          value={`£${avgPrice.toFixed(2)}`}
+          sub="across all products"
+          up={true}
+          accent="#10b981"
+        />
+        <StatCard
+          icon={ShoppingBag}
+          label="Categories"
+          value={totalCategories}
+          sub="product groups"
+          accent="#8b5cf6"
+        />
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Recent orders */}
-        <div className="lg:col-span-2 bg-surface border border-surface-100">
-          <div className="flex items-center justify-between px-5 py-4 border-b border-surface-100">
-            <h2 className="font-display font-bold text-base uppercase tracking-wide text-white">
-              Recent Orders
-            </h2>
-            <a href="/admin/orders" className="text-xs text-brand-red hover:text-brand-red-light font-semibold transition-colors">
-              View All →
-            </a>
-          </div>
-          <div className="divide-y divide-surface-100">
-            {recentOrders.length === 0 ? (
-              <div className="px-5 py-6 text-center">
-                <p className="text-sm text-text-muted">No recent orders found.</p>
-              </div>
-            ) : (
-              recentOrders.map((order) => (
-                <div key={order.id} className="flex items-center justify-between px-5 py-3.5 gap-4 hover:bg-surface-50/30 transition-colors">
-                  <div className="min-w-0">
-                    <p className="text-sm font-semibold text-text-primary">{order.id}</p>
-                    <p className="text-xs text-text-muted mt-0.5">{order.customer} · {order.date}</p>
-                  </div>
-                  <div className="flex items-center gap-3 shrink-0">
-                    <span className={`badge text-[10px] capitalize ${statusColors[order.status]}`}>
-                      {order.status}
+      {/* ── Main content row ────────────────────────────────────────── */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+
+        {/* Most reviewed products (col-span-2) */}
+        <div
+          className="lg:col-span-2 rounded-sm border overflow-hidden"
+          style={{ background: '#162130', borderColor: 'rgba(255,255,255,0.08)' }}
+        >
+          <SectionHeader title="Most Reviewed Products" href="/admin/products" />
+          <div className="divide-y divide-white/5">
+            {mostReviewed.map((product, i) => (
+              <div
+                key={product.id}
+                className="flex items-center gap-4 px-5 py-3 hover:bg-white/5 transition-colors"
+              >
+                {/* Rank */}
+                <span
+                  className="w-5 text-center font-display font-bold text-xs shrink-0"
+                  style={{ color: i < 3 ? '#1E73BE' : 'rgba(255,255,255,0.25)' }}
+                >
+                  {i + 1}
+                </span>
+                {/* Product image */}
+                <div className="w-10 h-10 shrink-0 overflow-hidden rounded-sm bg-white/5">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={product.primary_image ?? ''}
+                    alt={product.name}
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+                {/* Info */}
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-semibold text-white/90 truncate">{product.name}</p>
+                  <div className="flex items-center gap-3 mt-0.5">
+                    <span className="text-[11px] text-white/40">
+                      {product.review_count} reviews
                     </span>
-                    <span className="font-display font-bold text-brand-red text-sm tabular-nums">
-                      £{order.total.toFixed(2)}
+                    <span className="text-[11px] text-white/40">
+                      ★ {product.rating?.toFixed(1)}
                     </span>
                   </div>
                 </div>
-              ))
-            )}
+                {/* Price */}
+                <span className="font-display font-bold text-sm text-white/80 shrink-0 tabular-nums">
+                  £{product.price.toFixed(2)}
+                </span>
+                {/* Status */}
+                <span
+                  className="text-[10px] font-bold uppercase px-2 py-0.5 rounded-sm shrink-0"
+                  style={
+                    product.in_stock
+                      ? { background: '#10b98120', color: '#4ade80' }
+                      : { background: '#f8717120', color: '#f87171' }
+                  }
+                >
+                  {product.in_stock ? 'In Stock' : 'Out'}
+                </span>
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* Top products */}
-        <div className="bg-surface border border-surface-100">
-          <div className="flex items-center justify-between px-5 py-4 border-b border-surface-100">
-            <h2 className="font-display font-bold text-base uppercase tracking-wide text-white">
-              Top Products
-            </h2>
-            <a href="/admin/products" className="text-xs text-brand-red hover:text-brand-red-light font-semibold transition-colors">
-              All →
-            </a>
-          </div>
-          <div className="divide-y divide-surface-100">
-            {topProducts.map((product, i) => (
-              <div key={product.name} className="px-5 py-3.5">
-                <div className="flex items-start gap-3">
-                  <span className="font-display font-bold text-xs text-brand-red/50 tabular-nums w-4 shrink-0 mt-0.5">
+        {/* Top rated sidebar */}
+        <div
+          className="rounded-sm border overflow-hidden"
+          style={{ background: '#162130', borderColor: 'rgba(255,255,255,0.08)' }}
+        >
+          <SectionHeader title="Top Rated" href="/admin/products" />
+          <div className="divide-y divide-white/5">
+            {topRated.map((product, i) => (
+              <div key={product.id} className="px-5 py-3.5">
+                <div className="flex items-center gap-3">
+                  <span
+                    className="font-display font-bold text-xs w-4 shrink-0"
+                    style={{ color: '#1E73BE' }}
+                  >
                     {i + 1}
                   </span>
                   <div className="flex-1 min-w-0">
-                    <p className="text-xs font-semibold text-text-primary leading-snug line-clamp-1">
+                    <p className="text-xs font-semibold text-white/80 leading-snug truncate">
                       {product.name}
                     </p>
                     <div className="flex items-center justify-between mt-1">
-                      <span className="text-[11px] text-text-muted">{product.sold} sold</span>
-                      <span className="text-[11px] font-bold text-brand-red tabular-nums">
-                        £{product.revenue.toFixed(2)}
+                      <span className="text-[11px] text-white/40">
+                        ★ {product.rating?.toFixed(1)} ({product.review_count})
+                      </span>
+                      <span className="text-[11px] font-bold text-white/60 tabular-nums">
+                        £{product.price.toFixed(2)}
                       </span>
                     </div>
-                    {/* Mini bar */}
-                    <div className="h-1 bg-surface-200 mt-1.5 rounded-full overflow-hidden">
+                    {/* Rating bar */}
+                    <div
+                      className="h-1 mt-1.5 rounded-full overflow-hidden"
+                      style={{ background: 'rgba(255,255,255,0.08)' }}
+                    >
                       <div
-                        className="h-full bg-brand-red/60 rounded-full"
-                        style={{ width: `${(product.sold / topProducts[0].sold) * 100}%` }}
+                        className="h-full rounded-full"
+                        style={{
+                          width: `${((product.rating ?? 0) / 5) * 100}%`,
+                          background: '#1E73BE',
+                        }}
                       />
                     </div>
                   </div>
@@ -145,24 +241,60 @@ export default function AdminDashboard() {
         </div>
       </div>
 
-      {/* Quick actions */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+      {/* ── Category breakdown ─────────────────────────────────────── */}
+      <div
+        className="rounded-sm border overflow-hidden"
+        style={{ background: '#162130', borderColor: 'rgba(255,255,255,0.08)' }}
+      >
+        <SectionHeader title="Category Breakdown" href="/admin/categories" />
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-0 divide-x divide-y" style={{ borderColor: 'rgba(255,255,255,0.08)' }}>
+          {categories.map((cat) => {
+            const count = products.filter(p => p.category_id === cat.id || p.category_id?.startsWith(cat.id + '-')).length
+            const pct   = Math.round((count / totalProducts) * 100)
+            return (
+              <div key={cat.id} className="p-4 hover:bg-white/5 transition-colors">
+                <p className="text-sm font-semibold text-white/80 truncate">{cat.name}</p>
+                <p className="text-2xl font-display font-bold text-white mt-1">{count}</p>
+                <div
+                  className="h-1 mt-2 rounded-full overflow-hidden"
+                  style={{ background: 'rgba(255,255,255,0.08)' }}
+                >
+                  <div
+                    className="h-full rounded-full"
+                    style={{ width: `${pct}%`, background: '#1E73BE' }}
+                  />
+                </div>
+                <p className="text-[11px] text-white/30 mt-1">{pct}% of catalog</p>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+
+      {/* ── Quick Actions ───────────────────────────────────────────── */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         {[
-          { label: 'Add Product', href: '/admin/products/new', icon: Package },
-          { label: 'View Orders', href: '/admin/orders', icon: ShoppingBag },
-          { label: 'Manage Customers', href: '/admin/customers', icon: Users },
-          { label: 'Edit Categories', href: '/admin/categories', icon: Package },
-        ].map(({ label, href, icon: Icon }) => (
-          <a
+          { label: 'Add Product',       href: '/admin/products/new', icon: Plus,        color: '#1E73BE' },
+          { label: 'View Orders',        href: '/admin/orders',       icon: ShoppingBag, color: '#10b981' },
+          { label: 'Manage Customers',  href: '/admin/customers',    icon: Users,       color: '#f59e0b' },
+          { label: 'View Storefront',   href: '/',                   icon: ExternalLink,color: '#8b5cf6' },
+        ].map(({ label, href, icon: Icon, color }) => (
+          <Link
             key={href}
             href={href}
-            className="flex items-center gap-3 p-4 bg-surface border border-surface-100 hover:border-surface-300 text-sm font-semibold text-text-secondary hover:text-white transition-all group"
+            className="flex items-center gap-3 p-4 rounded-sm border font-semibold text-sm transition-all hover:scale-[1.01]"
+            style={{
+              background: `${color}10`,
+              borderColor: `${color}30`,
+              color: '#fff',
+            }}
           >
-            <Icon size={16} className="text-brand-red shrink-0" />
+            <Icon size={16} style={{ color }} className="shrink-0" />
             {label}
-          </a>
+          </Link>
         ))}
       </div>
+
     </div>
   )
 }

@@ -12,28 +12,36 @@ const config: Config = {
       colors: {
         brand: {
           header: '#173436',
-          teal: '#1E3D3F',
-          green: '#315B4C',
-          light: '#F5F5F5',
+          teal:   '#1E3D3F',
+          green:  '#315B4C',
+          light:  '#F5F5F5',
+          red:    '#C0392B',
         },
         border: {
-          light: '#E5E7EB',
+          light:   '#E5E7EB',
           DEFAULT: '#E5E7EB',
         },
         text: {
-          primary: '#111111',
+          primary:   '#111111',
           secondary: '#666666',
+          muted:     '#999999',
         },
         button: {
-          blue: '#1E73BE',
+          blue:  '#1E73BE',
           hover: '#185d9b',
         },
         surface: {
           DEFAULT: '#FFFFFF',
-          50: '#F9FAFB',
-          100: '#F3F4F6',
-          200: '#E5E7EB',
-          300: '#D1D5DB',
+          50:      '#F9FAFB',
+          100:     '#F3F4F6',
+          200:     '#E5E7EB',
+          300:     '#D1D5DB',
+        },
+        // Admin / Dark theme
+        dark: {
+          DEFAULT: '#0F1923',
+          100:     '#162130',
+          200:     '#1C2A3B',
         },
       },
       fontFamily: {
