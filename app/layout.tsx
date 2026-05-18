@@ -101,7 +101,7 @@ export default function RootLayout({
         </Providers>
 
         {/* Live Chat Widget (Tawk.to) */}
-        <Script id="tawk-live-chat" strategy="lazyOnload">
+        <Script id="tawk-live-chat" strategy="afterInteractive">
           {`
             var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
             (function(){

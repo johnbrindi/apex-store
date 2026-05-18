@@ -5,7 +5,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import {
   LayoutDashboard, Package, ShoppingBag,
   Users, Tag, Settings, LogOut, BarChart3,
-  ChevronRight, ExternalLink
+  ChevronRight, ExternalLink, Menu, X
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { logoutLocalUser } from '@/actions/auth'
@@ -24,9 +24,12 @@ interface AdminSidebarClientProps {
   user: { id: string; email: string; username?: string; role?: string }
 }
 
+import { useState } from 'react'
+
 export default function AdminSidebarClient({ user }: AdminSidebarClientProps) {
   const pathname = usePathname()
   const router   = useRouter()
+  const [isOpen, setIsOpen] = useState(false)
 
   const handleLogout = async () => {
     await logoutLocalUser()
@@ -37,7 +40,34 @@ export default function AdminSidebarClient({ user }: AdminSidebarClientProps) {
   const initials = (user.username ?? user.email ?? 'A').charAt(0).toUpperCase()
 
   return (
-    <aside className="w-60 shrink-0 bg-[#173436] border-r border-white/10 flex flex-col min-h-screen">
+    <>
+      <button 
+        onClick={() => setIsOpen(true)}
+        className="lg:hidden fixed top-3.5 left-4 z-[60] p-1 text-white/60 hover:text-white"
+        aria-label="Open sidebar"
+      >
+        <Menu size={20} />
+      </button>
+
+      {/* Backdrop */}
+      {isOpen && (
+        <div 
+          className="fixed inset-0 bg-black/60 z-[60] lg:hidden backdrop-blur-sm"
+          onClick={() => setIsOpen(false)}
+        />
+      )}
+
+      <aside className={cn(
+        "fixed inset-y-0 left-0 z-[70] w-60 bg-[#173436] border-r border-white/10 flex flex-col min-h-screen transition-transform duration-300 ease-in-out lg:static lg:translate-x-0",
+        isOpen ? "translate-x-0" : "-translate-x-full"
+      )}>
+        {/* Close button for mobile */}
+        <button 
+          onClick={() => setIsOpen(false)}
+          className="lg:hidden absolute top-4 right-4 p-1 text-white/60 hover:text-white"
+        >
+          <X size={20} />
+        </button>
       {/* Logo */}
       <div className="h-14 flex items-center px-5 border-b border-white/10">
         <Link href="/" className="flex items-center gap-2.5">
@@ -82,6 +112,7 @@ export default function AdminSidebarClient({ user }: AdminSidebarClientProps) {
                   ? 'text-white bg-white/10 border-l-2 border-l-[#1E73BE] pl-[14px]'
                   : 'text-white/60 hover:text-white hover:bg-white/5'
               )}
+              onClick={() => setIsOpen(false)}
             >
               <span className="flex items-center gap-3">
                 <item.icon size={15} className={active ? 'text-[#1E73BE]' : 'text-white/40'} />
@@ -112,5 +143,6 @@ export default function AdminSidebarClient({ user }: AdminSidebarClientProps) {
         </button>
       </div>
     </aside>
+    </>
   )
 }

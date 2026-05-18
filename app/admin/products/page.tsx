@@ -54,104 +54,93 @@ export default function AdminProductsPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="font-display font-bold text-2xl uppercase tracking-wide text-white">Products</h1>
-          <p className="text-text-muted text-sm mt-0.5">{allProducts.length} products total</p>
+          <h1 className="font-display font-bold text-xl uppercase tracking-wide text-white">Products</h1>
+          <p className="text-white/40 text-xs mt-0.5">{allProducts.length} products total</p>
         </div>
-        <Link href="/admin/products/new" className="btn-primary px-4 py-2.5 text-sm flex items-center gap-2">
-          <Plus size={15} />
-          Add Product
+        <Link href="/admin/products/new"
+          className="flex items-center gap-2 px-4 py-2.5 text-sm font-bold text-white rounded-sm transition-colors"
+          style={{ background: '#1E73BE' }}>
+          <Plus size={15} /> Add Product
         </Link>
       </div>
 
       {/* Toolbar */}
-      <div className="flex flex-wrap items-center gap-3 bg-surface border border-surface-100 p-4">
+      <div className="flex flex-wrap items-center gap-3 p-4 rounded-sm border"
+           style={{ background: '#162130', borderColor: 'rgba(255,255,255,0.08)' }}>
         <div className="relative flex-1 min-w-[200px]">
-          <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-text-muted" />
-          <input
-            type="text"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
+          <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-white/30" />
+          <input type="text" value={search} onChange={(e) => setSearch(e.target.value)}
             placeholder="Search products or SKU…"
-            className="input-base pl-9 py-2 text-sm"
-          />
+            className="w-full pl-9 pr-3 py-2 text-sm text-white placeholder:text-white/30 focus:outline-none rounded-sm border"
+            style={{ background: '#0F1923', borderColor: 'rgba(255,255,255,0.1)' }} />
         </div>
         <div className="flex items-center gap-2 flex-wrap">
           {statusOptions.map((s) => (
-            <button
-              key={s}
-              onClick={() => setStatusFilter(s)}
+            <button key={s} onClick={() => setStatusFilter(s)}
               className={cn(
-                'px-3 py-1.5 text-xs font-semibold uppercase tracking-wide border transition-colors',
-                statusFilter === s
-                  ? 'bg-brand-red border-brand-red text-white'
-                  : 'border-surface-200 text-text-muted hover:border-surface-300 hover:text-white'
+                'px-3 py-1.5 text-xs font-semibold uppercase tracking-wide border transition-colors capitalize rounded-sm',
+                statusFilter === s ? 'text-white border-[#1E73BE]' : 'text-white/40 border-white/10 hover:text-white hover:border-white/30'
               )}
-            >
+              style={statusFilter === s ? { background: '#1E73BE20' } : {}}>
               {s}
             </button>
           ))}
         </div>
-        <span className="text-xs text-text-muted ml-auto">
+        <span className="text-xs text-white/30 ml-auto">
           {filtered.length} result{filtered.length !== 1 ? 's' : ''}
         </span>
       </div>
 
       {/* Table */}
-      <div className="bg-surface border border-surface-100 overflow-hidden">
+      <div className="rounded-sm border overflow-hidden" style={{ background: '#162130', borderColor: 'rgba(255,255,255,0.08)' }}>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-surface-100 bg-surface-50/30">
+              <tr className="border-b" style={{ borderColor: 'rgba(255,255,255,0.08)', background: 'rgba(255,255,255,0.03)' }}>
                 <th className="px-4 py-3 text-left">
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-text-muted">Product</span>
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-white/30">Product</span>
                 </th>
                 <th className="px-4 py-3 text-left">
-                  <button onClick={() => handleSort('price')} className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest text-text-muted hover:text-white transition-colors">
+                  <button onClick={() => handleSort('price')} className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest text-white/30 hover:text-white transition-colors">
                     Price <SortIcon col="price" />
                   </button>
                 </th>
                 <th className="px-4 py-3 text-left">
-                  <button onClick={() => handleSort('stock')} className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest text-text-muted hover:text-white transition-colors">
+                  <button onClick={() => handleSort('stock')} className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest text-white/30 hover:text-white transition-colors">
                     Stock <SortIcon col="stock" />
                   </button>
                 </th>
                 <th className="px-4 py-3 text-left">
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-text-muted">Status</span>
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-white/30">Status</span>
                 </th>
                 <th className="px-4 py-3 text-left">
-                  <button onClick={() => handleSort('rating')} className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest text-text-muted hover:text-white transition-colors">
+                  <button onClick={() => handleSort('rating')} className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest text-white/30 hover:text-white transition-colors">
                     Rating <SortIcon col="rating" />
                   </button>
                 </th>
                 <th className="px-4 py-3 text-right">
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-text-muted">Actions</span>
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-white/30">Actions</span>
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-surface-100">
+            <tbody className="divide-y divide-white/5">
               {filtered.map((product) => (
-                <tr key={product.id} className="hover:bg-surface-50/30 transition-colors">
+                <tr key={product.id} className="hover:bg-white/5 transition-colors">
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-dark border border-surface-100 overflow-hidden shrink-0">
-                        <Image
-                          src={product.primary_image ?? '/assets/images/placeholder.jpg'}
-                          alt={product.name}
-                          width={40}
-                          height={40}
-                          className="w-full h-full object-cover"
-                        />
+                      <div className="w-10 h-10 rounded-sm border overflow-hidden shrink-0 bg-white/5" style={{ borderColor: 'rgba(255,255,255,0.08)' }}>
+                        <Image src={product.primary_image ?? '/assets/images/placeholder.jpg'} alt={product.name} width={40} height={40} className="w-full h-full object-contain" />
                       </div>
                       <div className="min-w-0">
-                        <p className="font-semibold text-text-primary truncate max-w-[200px]">{product.name}</p>
-                        <p className="text-xs text-text-muted font-mono">{product.sku}</p>
+                        <p className="font-semibold text-white/80 truncate max-w-[200px]">{product.name}</p>
+                        <p className="text-xs text-white/30 font-mono">{product.sku}</p>
                       </div>
                     </div>
                   </td>
                   <td className="px-4 py-3">
-                    <span className="font-display font-bold text-brand-red">{formatCurrency(product.price)}</span>
+                    <span className="font-display font-bold text-white tabular-nums">{formatCurrency(product.price)}</span>
                     {product.compare_at_price && (
-                      <span className="ml-2 text-xs text-text-muted line-through">{formatCurrency(product.compare_at_price)}</span>
+                      <span className="ml-2 text-xs text-white/30 line-through">{formatCurrency(product.compare_at_price)}</span>
                     )}
                   </td>
                   <td className="px-4 py-3">
@@ -176,27 +165,23 @@ export default function AdminProductsPage() {
                     {product.rating ? (
                       <div className="flex items-center gap-1.5">
                         <span className="text-yellow-400 text-xs">★</span>
-                        <span className="text-sm font-semibold text-text-secondary">{product.rating}</span>
-                        <span className="text-xs text-text-muted">({product.review_count})</span>
+                        <span className="text-sm font-semibold text-white/60">{product.rating}</span>
+                        <span className="text-xs text-white/30">({product.review_count})</span>
                       </div>
                     ) : (
-                      <span className="text-xs text-text-muted">No reviews</span>
+                      <span className="text-xs text-white/20">No reviews</span>
                     )}
                   </td>
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-1.5 justify-end">
-                      <Link
-                        href={`/product/${product.slug}`}
-                        target="_blank"
-                        className="p-1.5 text-text-muted hover:text-white transition-colors"
-                        title="View on storefront"
-                      >
+                      <Link href={`/product/${product.slug}`} target="_blank"
+                        className="p-1.5 text-white/30 hover:text-white transition-colors" title="View on storefront">
                         <Eye size={14} />
                       </Link>
-                      <button className="p-1.5 text-text-muted hover:text-brand-red transition-colors" title="Edit">
+                      <button className="p-1.5 text-white/30 hover:text-[#1E73BE] transition-colors" title="Edit">
                         <Edit2 size={14} />
                       </button>
-                      <button className="p-1.5 text-text-muted hover:text-red-400 transition-colors" title="Delete">
+                      <button className="p-1.5 text-white/30 hover:text-red-400 transition-colors" title="Delete">
                         <Trash2 size={14} />
                       </button>
                     </div>
@@ -209,8 +194,8 @@ export default function AdminProductsPage() {
 
         {filtered.length === 0 && (
           <div className="text-center py-12">
-            <p className="text-text-secondary font-semibold">No products found</p>
-            <p className="text-text-muted text-sm mt-1">Try adjusting your search or filters</p>
+            <p className="text-white/40 font-semibold">No products found</p>
+            <p className="text-white/25 text-sm mt-1">Try adjusting your search or filters</p>
           </div>
         )}
       </div>

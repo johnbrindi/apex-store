@@ -2,11 +2,14 @@
 
 import { cookies } from 'next/headers';
 import { createHash } from 'crypto';
+import { createClient } from '@/utils/supabase/server';
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
-function hash(password: string): string {
-  return createHash('sha256').update(password + 'steroids-uk-salt-2024').digest('hex');
+function hashPw(password: string): string {
+  return createHash('sha256')
+    .update(password + (process.env.AUTH_SECRET ?? 'steroids-uk-salt'))
+    .digest('hex');
 }
 
 function encode(obj: object): string {
@@ -21,22 +24,22 @@ function decode(token: string): any {
   }
 }
 
-function setCookieSession(user: object) {
+function setAuthCookie(user: object) {
   cookies().set('auth_token', encode(user), {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'lax',
     path: '/',
-    maxAge: 60 * 60 * 24 * 7,
+    maxAge: 60 * 60 * 24 * 7, // 7 days
   });
 }
 
-// ─── Admin Credentials (stored as env vars or hardcoded hash) ─────────────────
-// Admin email: admin@system.com  |  Password: anyoda12
-const ADMIN_EMAIL    = process.env.ADMIN_EMAIL    ?? 'admin@system.com';
-const ADMIN_HASH     = process.env.ADMIN_PASS_HASH ?? hash('anyoda12');
+// ─── Admin credentials ────────────────────────────────────────────────────────
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL ?? 'admin@system.com';
+const ADMIN_HASH  = hashPw(process.env.ADMIN_PASSWORD ?? 'anyoda12');
 
 // ─── Register ─────────────────────────────────────────────────────────────────
+// Saves user to Supabase auth.users (and auto-creates profile via DB trigger)
 
 export async function registerLocalUser(formData: FormData) {
   try {
@@ -48,15 +51,34 @@ export async function registerLocalUser(formData: FormData) {
     if (password.length < 6)              return { error: 'Password must be at least 6 characters.' };
     if (email === ADMIN_EMAIL)            return { error: 'That email address is not available.' };
 
-    const user = {
-      id:        Math.random().toString(36).substring(2, 15),
-      username,
+    // Save user to Supabase (persisted in DB, not just a cookie)
+    const supabase = createClient();
+    const { data, error: signUpError } = await supabase.auth.signUp({
       email,
-      role:      'customer',
+      password,
+      options: {
+        data: { username, first_name: username },
+      },
+    });
+
+    if (signUpError) {
+      return { error: signUpError.message };
+    }
+
+    if (!data.user) {
+      return { error: 'Failed to create account. Please try again.' };
+    }
+
+    // Set local cookie for middleware routing
+    const user = {
+      id:       data.user.id,
+      username,
+      email:    data.user.email!,
+      role:     'customer',
       createdAt: new Date().toISOString(),
     };
+    setAuthCookie(user);
 
-    setCookieSession(user);
     return { success: true, user };
   } catch (err: any) {
     return { error: err.message || 'Failed to register.' };
@@ -64,6 +86,7 @@ export async function registerLocalUser(formData: FormData) {
 }
 
 // ─── Login ────────────────────────────────────────────────────────────────────
+// Admin: hardcoded credentials. Regular users: validated against Supabase.
 
 export async function loginLocalUser(formData: FormData) {
   try {
@@ -72,36 +95,33 @@ export async function loginLocalUser(formData: FormData) {
 
     if (!email || !password) return { error: 'Email and password are required.' };
 
-    // ── Admin account check ──────────────────────────────────────────────────
+    // ── Admin check (hardcoded, no DB needed) ────────────────────────────────
     if (email === ADMIN_EMAIL) {
-      if (hash(password) !== ADMIN_HASH) {
+      if (hashPw(password) !== ADMIN_HASH) {
         return { error: 'Invalid email or password.' };
       }
-      const adminUser = {
-        id:       'admin-001',
-        username: 'Admin',
-        email:    ADMIN_EMAIL,
-        role:     'admin',
-      };
-      setCookieSession(adminUser);
-      return { success: true, user: adminUser };
+      const adminUser = { id: 'admin-001', username: 'Admin', email: ADMIN_EMAIL, role: 'admin' };
+      setAuthCookie(adminUser);
+      return { success: true, user: adminUser, role: 'admin' };
     }
 
-    // ── Regular user: accept any registered user ─────────────────────────────
-    // Since we have no persistent DB, any valid email + ≥6 char password creates a session
-    // In production this would query a DB
-    if (password.length < 6) return { error: 'Invalid email or password.' };
+    // ── Regular user: validate against Supabase ──────────────────────────────
+    const supabase = createClient();
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
 
+    if (error || !data.user) {
+      return { error: 'Invalid email or password.' };
+    }
+
+    // Set local cookie so middleware can read role/identity
     const user = {
-      id:        Buffer.from(email).toString('base64url').substring(0, 12),
-      username:  email.split('@')[0],
-      email,
-      role:      'customer',
-      createdAt: new Date().toISOString(),
+      id:       data.user.id,
+      username: data.user.user_metadata?.username ?? data.user.user_metadata?.first_name ?? email.split('@')[0],
+      email:    data.user.email!,
+      role:     'customer',
     };
-
-    setCookieSession(user);
-    return { success: true, user };
+    setAuthCookie(user);
+    return { success: true, user, role: 'customer' };
   } catch (err: any) {
     return { error: err.message || 'Failed to login.' };
   }
@@ -110,11 +130,18 @@ export async function loginLocalUser(formData: FormData) {
 // ─── Logout ───────────────────────────────────────────────────────────────────
 
 export async function logoutLocalUser() {
+  // Sign out Supabase session (for regular users)
+  try {
+    const supabase = createClient();
+    await supabase.auth.signOut();
+  } catch {
+    // Ignore if no Supabase session
+  }
   cookies().delete('auth_token');
   return { success: true };
 }
 
-// ─── Get Current User ─────────────────────────────────────────────────────────
+// ─── Get current user from cookie ─────────────────────────────────────────────
 
 export async function getLocalUser() {
   const token = cookies().get('auth_token')?.value;
@@ -122,7 +149,7 @@ export async function getLocalUser() {
   return decode(token);
 }
 
-// ─── Admin guard helper ───────────────────────────────────────────────────────
+// ─── Admin guard ──────────────────────────────────────────────────────────────
 
 export async function requireAdmin() {
   const user = await getLocalUser();

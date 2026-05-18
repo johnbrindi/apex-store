@@ -10,47 +10,87 @@ export default function CheckoutPage() {
   const { items, subtotal, clearCart } = useCartStore()
   const [placing, setPlacing] = useState(false)
   const [placed, setPlaced] = useState(false)
+  const [orderId, setOrderId] = useState<string | null>(null)
   const [paymentMethod, setPaymentMethod] = useState('bank_transfer')
 
+  // Billing form state
+  const [firstName,  setFirstName]  = useState('')
+  const [lastName,   setLastName]   = useState('')
+  const [email,      setEmail]      = useState('')
+  const [address1,   setAddress1]   = useState('')
+  const [city,       setCity]       = useState('')
+  const [postcode,   setPostcode]   = useState('')
+  const [country,    setCountry]    = useState('')
+  const [phone,      setPhone]      = useState('')
+  const [notes,      setNotes]      = useState('')
+
   const cartTotal = subtotal()
-  const shipping = cartTotal >= 149 ? 0 : 4.99
-  const total = cartTotal + shipping
+  const shipping  = cartTotal >= 149 ? 0 : 4.99
+  const total     = cartTotal + shipping
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setPlacing(true)
-    
-    // Create detailed order message for the email
-    const orderDetails = items.map(i => `${i.quantity}x ${i.product.name} (£${(i.price * i.quantity).toFixed(2)})`).join('\n');
+
+    const customerName  = `${firstName} ${lastName}`.trim()
+    const orderDetails  = items
+      .map(i => `${i.quantity}x ${i.product.name} (£${(i.price * i.quantity).toFixed(2)})`)
+      .join('\n')
     const orderMessage = `
 New Order Received!
 
+Customer: ${customerName}
+Email: ${email}
 Total Amount: £${total.toFixed(2)}
 Payment Method: ${paymentMethod}
+Address: ${address1}, ${city}, ${postcode}, ${country}
 
 Products:
 ${orderDetails}
-    `;
+    `
 
     try {
-      // Send real email to Davethomson1122@gmail.com via FormSubmit.co AJAX API
+      // 1. Save order to Supabase database
+      await fetch('/api/orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          customer_name:   customerName,
+          customer_email:  email,
+          payment_method:  paymentMethod,
+          shipping_address: { address1, city, postcode, country, phone },
+          notes,
+          subtotal:        cartTotal,
+          shipping_cost:   shipping,
+          total_amount:    total,
+          items: items.map(i => ({
+            product_id:    i.product.id,
+            product_name:  i.product.name,
+            product_image: i.product.primary_image ?? null,
+            product_sku:   i.product.sku ?? null,
+            quantity:      i.quantity,
+            unit_price:    i.price,
+            total_price:   i.price * i.quantity,
+          })),
+        }),
+      }).then(r => r.json()).then(d => { if (d.orderId) setOrderId(d.orderId) }).catch(() => {})
+
+      // 2. Send email notification via FormSubmit.co
       await fetch('https://formsubmit.co/ajax/Davethomson1122@gmail.com', {
         method: 'POST',
-        headers: { 
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({
-            name: "Apex Store Order",
-            _subject: "New Order! £" + total.toFixed(2),
-            message: orderMessage,
-            _template: "table"
-        })
-      });
+          name: customerName,
+          email,
+          _subject: `New Order! £${total.toFixed(2)} — ${customerName}`,
+          message: orderMessage,
+          _template: 'table',
+        }),
+      }).catch(() => {})
     } catch (err) {
-      console.error("Failed to send order email", err);
+      console.error('Order submission error:', err)
     }
-    
+
     clearCart()
     setPlacing(false)
     setPlaced(true)
@@ -102,11 +142,11 @@ ${orderDetails}
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="block text-[13px] font-semibold text-text-primary mb-1.5">First name <span className="text-red-500">*</span></label>
-                <input required type="text" className="w-full border border-border-light p-2.5 text-sm focus:outline-none focus:border-button-blue" />
+                <input required type="text" value={firstName} onChange={e => setFirstName(e.target.value)} className="w-full border border-border-light p-2.5 text-sm focus:outline-none focus:border-button-blue" />
               </div>
               <div>
                 <label className="block text-[13px] font-semibold text-text-primary mb-1.5">Last name <span className="text-red-500">*</span></label>
-                <input required type="text" className="w-full border border-border-light p-2.5 text-sm focus:outline-none focus:border-button-blue" />
+                <input required type="text" value={lastName} onChange={e => setLastName(e.target.value)} className="w-full border border-border-light p-2.5 text-sm focus:outline-none focus:border-button-blue" />
               </div>
             </div>
 
@@ -122,13 +162,13 @@ ${orderDetails}
 
             <div>
               <label className="block text-[13px] font-semibold text-text-primary mb-1.5">Street address <span className="text-red-500">*</span></label>
-              <input required type="text" placeholder="House number and street name" className="w-full border border-border-light p-2.5 text-sm focus:outline-none focus:border-button-blue mb-2" />
+              <input required type="text" placeholder="House number and street name" value={address1} onChange={e => setAddress1(e.target.value)} className="w-full border border-border-light p-2.5 text-sm focus:outline-none focus:border-button-blue mb-2" />
               <input type="text" placeholder="Apartment, suite, unit, etc. (optional)" className="w-full border border-border-light p-2.5 text-sm focus:outline-none focus:border-button-blue" />
             </div>
 
             <div>
               <label className="block text-[13px] font-semibold text-text-primary mb-1.5">Town / City <span className="text-red-500">*</span></label>
-              <input required type="text" className="w-full border border-border-light p-2.5 text-sm focus:outline-none focus:border-button-blue" />
+              <input required type="text" value={city} onChange={e => setCity(e.target.value)} className="w-full border border-border-light p-2.5 text-sm focus:outline-none focus:border-button-blue" />
             </div>
 
             <div>
@@ -138,17 +178,17 @@ ${orderDetails}
 
             <div>
               <label className="block text-[13px] font-semibold text-text-primary mb-1.5">Postcode / ZIP <span className="text-red-500">*</span></label>
-              <input required type="text" className="w-full border border-border-light p-2.5 text-sm focus:outline-none focus:border-button-blue uppercase" />
+              <input required type="text" value={postcode} onChange={e => setPostcode(e.target.value)} className="w-full border border-border-light p-2.5 text-sm focus:outline-none focus:border-button-blue uppercase" />
             </div>
 
             <div>
               <label className="block text-[13px] font-semibold text-text-primary mb-1.5">Phone (optional)</label>
-              <input type="tel" className="w-full border border-border-light p-2.5 text-sm focus:outline-none focus:border-button-blue" />
+              <input type="tel" value={phone} onChange={e => setPhone(e.target.value)} className="w-full border border-border-light p-2.5 text-sm focus:outline-none focus:border-button-blue" />
             </div>
 
             <div>
               <label className="block text-[13px] font-semibold text-text-primary mb-1.5">Email address <span className="text-red-500">*</span></label>
-              <input required type="email" className="w-full border border-border-light p-2.5 text-sm focus:outline-none focus:border-button-blue" />
+              <input required type="email" value={email} onChange={e => setEmail(e.target.value)} className="w-full border border-border-light p-2.5 text-sm focus:outline-none focus:border-button-blue" />
             </div>
 
             <div className="pt-4">
@@ -160,7 +200,7 @@ ${orderDetails}
 
             <div>
               <label className="block text-[13px] font-semibold text-text-primary mb-1.5">Order notes (optional)</label>
-              <textarea rows={3} placeholder="Notes about your order, e.g. special notes for delivery." className="w-full border border-border-light p-2.5 text-sm focus:outline-none focus:border-button-blue resize-none" />
+              <textarea rows={3} value={notes} onChange={e => setNotes(e.target.value)} placeholder="Notes about your order, e.g. special notes for delivery." className="w-full border border-border-light p-2.5 text-sm focus:outline-none focus:border-button-blue resize-none" />
             </div>
           </div>
         </div>

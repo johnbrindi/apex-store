@@ -73,8 +73,13 @@ function MyAccountPageContent() {
         setLoginError(result.error)
         return
       }
-      
-      router.push(redirectPath)
+
+      // Admin users always go to /admin dashboard
+      if ((result as any).role === 'admin') {
+        router.push('/admin')
+      } else {
+        router.push(redirectPath)
+      }
       router.refresh()
     } catch {
       setLoginError('An error occurred. Please try again.')

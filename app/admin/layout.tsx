@@ -20,7 +20,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
       {/* Main content area */}
       <div className="flex-1 flex flex-col min-h-screen overflow-hidden">
         {/* Top bar */}
-        <header className="h-14 border-b border-white/10 flex items-center justify-between px-6 shrink-0" style={{ background: '#162130' }}>
+        <header className="h-14 border-b border-white/10 flex items-center justify-between px-6 pl-14 lg:pl-6 shrink-0" style={{ background: '#162130' }}>
           <div className="text-sm text-white/60 font-medium">
             Steroids UK — Admin Dashboard
           </div>
