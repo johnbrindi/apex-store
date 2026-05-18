@@ -13,7 +13,7 @@ export default function Footer() {
               </div>
               <div className="font-display font-bold text-lg tracking-tight uppercase leading-tight text-white">
                 <div>STEROIDS-UK</div>
-                <div className="text-white/70 text-xs">.COM</div>
+                <div className="text-white/70 text-xs">.online</div>
               </div>
             </Link>
             <p className="text-xs text-white/70 leading-relaxed max-w-md">
@@ -78,7 +78,7 @@ export default function Footer() {
         {/* Copyright */}
         <div className="border-t border-white/10 pt-6 flex justify-between items-center text-[11px] text-white/70">
           <p>
-            Made for Steroids-Uk.com {new Date().getFullYear()}.
+            Made for Steroids-Uk.online {new Date().getFullYear()}.
           </p>
         </div>
       </div>

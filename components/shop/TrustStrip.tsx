@@ -6,62 +6,63 @@ import Image from 'next/image'
 // Using actual illustrated character images from steroids-uk.com
 const features = [
   {
-    image: 'https://steroids-uk.com/wp-content/uploads/2021/10/top-uk-store.png',
+    image: 'https://steroids-uk.com/wp-content/uploads/2025/10/top-uk-store-steroids-ukcom-e1761588952987-70x70.webp',
     title: 'Top UK Store',
     subtitle: 'Offering 1,000+ products',
     href: '/shop',
     fallback: '👑',
   },
   {
-    image: 'https://steroids-uk.com/wp-content/uploads/2021/10/low-prices.png',
+    image: 'https://steroids-uk.com/wp-content/uploads/2025/10/low-prices-steroids-ukcom-1-70x70.webp',
     title: 'Low Prices',
     subtitle: 'Best prices guaranteed.',
     href: '/shop',
     fallback: '💰',
   },
   {
-    image: 'https://steroids-uk.com/wp-content/uploads/2021/10/next-day-delivery.png',
+    image: 'https://steroids-uk.com/wp-content/uploads/2025/10/next-day-delivery-steroids-uk.com_-70x70.webp',
     title: 'Next Day Delivery',
     subtitle: 'Order before 2PM',
     href: '/shipping',
     fallback: '🚚',
   },
   {
-    image: 'https://steroids-uk.com/wp-content/uploads/2021/10/best-anabolic.png',
+    image: 'https://steroids-uk.com/wp-content/uploads/2025/10/anabolic-steroids-steroid-ukcom-70x70.webp',
     title: 'The Best Anabolic Steroids Shop in Great Britain',
     subtitle: '',
     href: '/shop',
     fallback: '🏆',
   },
   {
-    image: 'https://steroids-uk.com/wp-content/uploads/2021/10/fat-burners.png',
+    image: 'https://steroids-uk.com/wp-content/uploads/2025/10/fat-burners-steorids-ukcom-70x70.webp',
     title: 'The Strongest Fat Burners',
     subtitle: '',
     href: '/shop/fat-burners',
     fallback: '🔥',
   },
   {
-    image: 'https://steroids-uk.com/wp-content/uploads/2021/10/lab-tested.png',
+    image: 'https://steroids-uk.com/wp-content/uploads/2025/10/laboratory-tested-steroids-ukcom-70x70.webp',
     title: 'Laboratory Tested Steroids For Sale',
     subtitle: 'Check laboratory tests',
     href: '/lab-tests',
     fallback: '🔬',
   },
   {
-    image: 'https://steroids-uk.com/wp-content/uploads/2021/10/secure-payment.png',
+    image: 'https://steroids-uk.com/wp-content/uploads/2025/10/secure-payment-steroids-ukcom-70x70.webp',
     title: 'Secure Payment',
     subtitle: '100% secure payments',
     href: '/payments',
     fallback: '💳',
   },
   {
-    image: 'https://steroids-uk.com/wp-content/uploads/2021/10/europe-usa.png',
+    image: 'https://steroids-uk.com/wp-content/uploads/2025/10/europe-and-usa-steroids-ukcom-70x70.webp',
     title: 'Europe and USA store warehouse option',
     subtitle: '',
     href: '/shop',
     fallback: '🌍',
   },
 ]
+
 
 function TrustIcon({ src, fallback, title }: { src: string; fallback: string; title: string }) {
   return (

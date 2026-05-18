@@ -12,17 +12,24 @@ export const metadata: Metadata = {
     'Buy the best quality steroids in the UK. Premium pharmaceutical-grade performance compounds, SARMs, peptides, and oral anabolics. Lab tested, discreetly shipped.',
   keywords: [
     'buy steroids uk',
-    'uk steroids',
-    'performance supplements',
-    'anabolics for sale',
+    'uk steroids online',
+    'anabolic steroids for sale uk',
     'testosterone enanthate uk',
     'buy dianabol uk',
     'sarms uk',
-    'peptides for sale',
-    'lab tested steroids',
+    'peptides for sale uk',
+    'lab tested steroids uk',
+    'injectable steroids uk',
+    'oral steroids uk',
+    'clenbuterol uk',
+    'anavar uk',
+    'buy steroids online uk',
+    'pct uk',
+    'fat burners uk',
+    'buysteroidsuk.online',
   ],
   alternates: {
-    canonical: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://steroids-uk.com',
+    canonical: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.buysteroidsuk.online',
   },
   openGraph: {
     type: 'website',
@@ -30,7 +37,8 @@ export const metadata: Metadata = {
     siteName: 'Steroids UK',
     title: 'Buy Steroids UK | Top Performance Compounds & Anabolics',
     description: 'Buy the best quality steroids in the UK. Premium pharmaceutical-grade performance compounds, SARMs, peptides, and oral anabolics. Lab tested, discreetly shipped.',
-    url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://steroids-uk.com',
+    url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.buysteroidsuk.online',
+    images: [{ url: 'https://www.buysteroidsuk.online/og-image.jpg', width: 1200, height: 630 }],
   },
   robots: {
     index: true,
@@ -55,8 +63,8 @@ export default function RootLayout({
     '@type': 'WebStore',
     name: 'Steroids UK',
     description: 'Buy the best quality steroids in the UK. Premium pharmaceutical-grade performance compounds.',
-    url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://steroids-uk.com',
-    image: `${process.env.NEXT_PUBLIC_SITE_URL ?? 'https://steroids-uk.com'}/assets/images/logo.png`,
+    url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.buysteroidsuk.online',
+    image: `${process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.buysteroidsuk.online'}/assets/images/logo.png`,
     address: {
       '@type': 'PostalAddress',
       addressCountry: 'UK'
@@ -90,9 +98,7 @@ export default function RootLayout({
             (function(){
             var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
             s1.async=true;
-            // NOTE FOR ADMIN: Replace this src link with your own Tawk.to Direct Chat Link!
-            // You can get yours for free at https://www.tawk.to/
-            s1.src='https://embed.tawk.to/6646543b981b6c5647715b9e/1hu11e3b6';
+            s1.src='https://embed.tawk.to/6a0b0c3ca536181c3989749e/1jotifk2t';
             s1.charset='UTF-8';
             s1.setAttribute('crossorigin','*');
             s0.parentNode.insertBefore(s1,s0);

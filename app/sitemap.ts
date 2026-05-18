@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
 import { products, categories, blogPosts } from '@/data/mock'
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://steroids-uk.com'
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.buysteroidsuk.online'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [

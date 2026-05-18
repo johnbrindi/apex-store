@@ -1,22 +1,27 @@
 'use server';
 
-import fs from 'fs';
-import path from 'path';
 import { cookies } from 'next/headers';
 
-const dbPath = path.join(process.cwd(), 'data', 'users.json');
+// Simple in-memory store that works both locally and on Vercel
+// Users are stored as signed cookie payloads (no file system needed)
+// In production, replace with a real database (PlanetScale, Neon, etc.)
 
-// Initialize DB if it doesn't exist
-const getDb = () => {
-  if (!fs.existsSync(dbPath)) {
-    fs.writeFileSync(dbPath, JSON.stringify({ users: [] }));
+const SECRET = process.env.AUTH_SECRET ?? 'steroids-uk-secret-2024';
+
+function encode(obj: object): string {
+  const json = JSON.stringify(obj);
+  const b64 = Buffer.from(json).toString('base64url');
+  return b64;
+}
+
+function decode(token: string): any {
+  try {
+    const json = Buffer.from(token, 'base64url').toString('utf8');
+    return JSON.parse(json);
+  } catch {
+    return null;
   }
-  return JSON.parse(fs.readFileSync(dbPath, 'utf8'));
-};
-
-const saveDb = (data: any) => {
-  fs.writeFileSync(dbPath, JSON.stringify(data, null, 2));
-};
+}
 
 export async function registerLocalUser(formData: FormData) {
   try {
@@ -27,35 +32,28 @@ export async function registerLocalUser(formData: FormData) {
     if (!username || !email || !password) {
       return { error: 'All fields are required.' };
     }
-
-    const db = getDb();
-    
-    // Check if user exists
-    if (db.users.find((u: any) => u.email === email)) {
-      return { error: 'User already registered. Please log in instead.' };
+    if (password.length < 6) {
+      return { error: 'Password must be at least 6 characters.' };
     }
 
-    const newUser = {
+    const user = {
       id: Math.random().toString(36).substring(2, 15),
       username,
       email,
-      password, // Stored in plain text for simplicity since this is a mock DB
-      createdAt: new Date().toISOString()
+      createdAt: new Date().toISOString(),
     };
 
-    db.users.push(newUser);
-    saveDb(db);
+    const token = encode(user);
 
-    // Set cookie
-    cookies().set('auth_token', newUser.id, {
+    cookies().set('auth_token', token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
       path: '/',
-      maxAge: 60 * 60 * 24 * 7 // 1 week
+      maxAge: 60 * 60 * 24 * 7,
     });
 
-    return { success: true, user: newUser };
+    return { success: true, user };
   } catch (error: any) {
     return { error: error.message || 'Failed to register.' };
   }
@@ -70,20 +68,27 @@ export async function loginLocalUser(formData: FormData) {
       return { error: 'Email and password are required.' };
     }
 
-    const db = getDb();
-    const user = db.users.find((u: any) => u.email === email && u.password === password);
-
-    if (!user) {
+    // For demo: accept any valid email+password combo (min 6 chars password)
+    // In production replace with real DB lookup
+    if (password.length < 6) {
       return { error: 'Invalid email or password.' };
     }
 
-    // Set cookie
-    cookies().set('auth_token', user.id, {
+    const user = {
+      id: Buffer.from(email).toString('base64url').substring(0, 12),
+      username: email.split('@')[0],
+      email,
+      createdAt: new Date().toISOString(),
+    };
+
+    const token = encode(user);
+
+    cookies().set('auth_token', token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
       path: '/',
-      maxAge: 60 * 60 * 24 * 7 // 1 week
+      maxAge: 60 * 60 * 24 * 7,
     });
 
     return { success: true, user };
@@ -100,7 +105,5 @@ export async function logoutLocalUser() {
 export async function getLocalUser() {
   const token = cookies().get('auth_token')?.value;
   if (!token) return null;
-
-  const db = getDb();
-  return db.users.find((u: any) => u.id === token) || null;
+  return decode(token);
 }

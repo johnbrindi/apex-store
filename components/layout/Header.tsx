@@ -59,7 +59,7 @@ export default function Header() {
             </div>
             <div className="font-display font-bold text-sm md:text-base tracking-tight text-text-primary uppercase leading-tight">
               <div className="text-brand-header">STEROIDS-UK</div>
-              <div className="text-text-secondary text-xs">.COM</div>
+              <div className="text-text-secondary text-xs">.ONLINE</div>
             </div>
           </div>
         </Link>

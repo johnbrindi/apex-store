@@ -61,7 +61,7 @@ export default function MobileNav() {
             {/* Header */}
             <div className="flex items-center justify-between px-4 h-14 border-b border-border-light bg-brand-header shrink-0">
               <span className="font-display font-bold text-base text-white uppercase tracking-wider">
-                STEROIDS-UK.COM
+                STEROIDS-UK.ONLINE
               </span>
               <button
                 onClick={closeMobileNav}
