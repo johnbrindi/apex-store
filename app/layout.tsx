@@ -1,7 +1,22 @@
 import type { Metadata } from 'next'
+import { Barlow, Oswald } from 'next/font/google'
 import './globals.css'
 import Providers from '@/components/Providers'
 import Script from 'next/script'
+
+const barlow = Barlow({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-barlow',
+  display: 'swap',
+})
+
+const oswald = Oswald({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-oswald',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: {
@@ -75,18 +90,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Oswald:wght@400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="bg-surface-100 text-text-primary font-sans antialiased">
+      <body className={`bg-surface-100 text-text-primary font-sans antialiased ${barlow.variable} ${oswald.variable}`}>
         <Providers>
           {children}
         </Providers>

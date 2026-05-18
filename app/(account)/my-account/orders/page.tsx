@@ -83,7 +83,7 @@ export default function OrdersPage() {
 
                 {/* Order items */}
                 <div className="px-5 py-4 space-y-3">
-                  {order.items.map((item, i) => (
+                  {order.items.map((item: any, i: number) => (
                     <div key={i} className="flex items-center gap-4">
                       <div className="w-12 h-12 bg-dark border border-surface-100 overflow-hidden shrink-0">
                         {/* eslint-disable-next-line @next/next/no-img-element */}

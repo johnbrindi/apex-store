@@ -7,6 +7,8 @@ import TrustStrip from '@/components/shop/TrustStrip'
 import ReviewsSection from '@/components/shop/ReviewsSection'
 import Link from 'next/link'
 
+import Image from 'next/image'
+
 export const metadata: Metadata = {
   title: 'Steroids UK - UK Steroids Shop | Buy Anabolic Steroids Online',
   description: 'The most trusted online portal for buying quality anabolic steroids in the UK. Lab tested, discreet shipping, next day delivery.',
@@ -26,11 +28,12 @@ export default function HomePage() {
           <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
             
             {/* Image Column */}
-            <div className="w-full md:w-1/2">
-              <img 
+            <div className="w-full md:w-1/2 relative min-h-[300px]">
+              <Image 
                 src="https://steroids-uk.com/wp-content/uploads/2025/11/muscle-400x267.webp" 
                 alt="Bodybuilder"
-                className="w-full h-auto object-cover shadow-lg"
+                fill
+                className="object-cover shadow-lg"
               />
             </div>
 
