@@ -4,39 +4,7 @@ import { Package, Clock, ChevronRight, ShoppingBag } from 'lucide-react'
 
 export const metadata: Metadata = { title: 'My Orders' }
 
-const mockOrders = [
-  {
-    id: 'ORD-8821',
-    date: '2026-05-10',
-    status: 'delivered',
-    total: 87.80,
-    items: [
-      { name: 'Testosterone Enanthate 300', qty: 1, price: 42.90, image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=80&q=80' },
-      { name: 'Anavar 10mg Tablets', qty: 1, price: 47.90, image: 'https://images.unsplash.com/photo-1550572017-edd951b55104?w=80&q=80' },
-    ],
-    tracking: 'GB123456789',
-  },
-  {
-    id: 'ORD-8754',
-    date: '2026-04-28',
-    status: 'processing',
-    total: 149.90,
-    items: [
-      { name: 'Bulking Stack – Pro Series', qty: 1, price: 149.90, image: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=80&q=80' },
-    ],
-    tracking: null,
-  },
-  {
-    id: 'ORD-8701',
-    date: '2026-04-15',
-    status: 'delivered',
-    total: 42.90,
-    items: [
-      { name: 'Testosterone Cypionate 200', qty: 1, price: 39.90, image: 'https://images.unsplash.com/photo-1585435557343-3b092031a831?w=80&q=80' },
-    ],
-    tracking: 'GB987654321',
-  },
-]
+const mockOrders: any[] = [];
 
 const statusConfig: Record<string, { color: string; label: string }> = {
   pending:    { color: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30',  label: 'Pending' },

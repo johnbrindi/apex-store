@@ -10,13 +10,7 @@ const stats = [
   { label: 'Products in Stock', value: '1,032', change: '-2.1%', up: false, icon: Package },
 ]
 
-const recentOrders = [
-  { id: 'ORD-8821', customer: 'James R.', total: 87.80, status: 'delivered', date: '10 May 2026' },
-  { id: 'ORD-8820', customer: 'Mike T.', total: 149.90, status: 'processing', date: '10 May 2026' },
-  { id: 'ORD-8819', customer: 'D. Collins', total: 42.90, status: 'shipped', date: '9 May 2026' },
-  { id: 'ORD-8818', customer: 'Sarah L.', total: 64.90, status: 'pending', date: '9 May 2026' },
-  { id: 'ORD-8817', customer: 'Tom B.', total: 189.70, status: 'delivered', date: '8 May 2026' },
-]
+const recentOrders: any[] = [];
 
 const topProducts = [
   { name: 'Testosterone Enanthate 300', sold: 84, revenue: 3603.60 },
@@ -84,22 +78,28 @@ export default function AdminDashboard() {
             </a>
           </div>
           <div className="divide-y divide-surface-100">
-            {recentOrders.map((order) => (
-              <div key={order.id} className="flex items-center justify-between px-5 py-3.5 gap-4 hover:bg-surface-50/30 transition-colors">
-                <div className="min-w-0">
-                  <p className="text-sm font-semibold text-text-primary">{order.id}</p>
-                  <p className="text-xs text-text-muted mt-0.5">{order.customer} · {order.date}</p>
-                </div>
-                <div className="flex items-center gap-3 shrink-0">
-                  <span className={`badge text-[10px] capitalize ${statusColors[order.status]}`}>
-                    {order.status}
-                  </span>
-                  <span className="font-display font-bold text-brand-red text-sm tabular-nums">
-                    £{order.total.toFixed(2)}
-                  </span>
-                </div>
+            {recentOrders.length === 0 ? (
+              <div className="px-5 py-6 text-center">
+                <p className="text-sm text-text-muted">No recent orders found.</p>
               </div>
-            ))}
+            ) : (
+              recentOrders.map((order) => (
+                <div key={order.id} className="flex items-center justify-between px-5 py-3.5 gap-4 hover:bg-surface-50/30 transition-colors">
+                  <div className="min-w-0">
+                    <p className="text-sm font-semibold text-text-primary">{order.id}</p>
+                    <p className="text-xs text-text-muted mt-0.5">{order.customer} · {order.date}</p>
+                  </div>
+                  <div className="flex items-center gap-3 shrink-0">
+                    <span className={`badge text-[10px] capitalize ${statusColors[order.status]}`}>
+                      {order.status}
+                    </span>
+                    <span className="font-display font-bold text-brand-red text-sm tabular-nums">
+                      £{order.total.toFixed(2)}
+                    </span>
+                  </div>
+                </div>
+              ))
+            )}
           </div>
         </div>
 

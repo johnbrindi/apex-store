@@ -20,8 +20,36 @@ export default function CheckoutPage() {
     e.preventDefault()
     setPlacing(true)
     
-    // Simulate sending email to Davethomson1122@gmail.com
-    await new Promise(r => setTimeout(r, 1500))
+    // Create detailed order message for the email
+    const orderDetails = items.map(i => `${i.quantity}x ${i.product.name} (£${(i.price * i.quantity).toFixed(2)})`).join('\n');
+    const orderMessage = `
+New Order Received!
+
+Total Amount: £${total.toFixed(2)}
+Payment Method: ${paymentMethod}
+
+Products:
+${orderDetails}
+    `;
+
+    try {
+      // Send real email to Davethomson1122@gmail.com via FormSubmit.co AJAX API
+      await fetch('https://formsubmit.co/ajax/Davethomson1122@gmail.com', {
+        method: 'POST',
+        headers: { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+            name: "Apex Store Order",
+            _subject: "New Order! £" + total.toFixed(2),
+            message: orderMessage,
+            _template: "table"
+        })
+      });
+    } catch (err) {
+      console.error("Failed to send order email", err);
+    }
     
     clearCart()
     setPlacing(false)

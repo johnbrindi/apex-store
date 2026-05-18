@@ -185,10 +185,9 @@ export default function ShopClient({ searchParams, categorySlug, categoryName }:
             </button>
 
             {/* Results count */}
-            <p className="text-sm text-text-secondary">
-              <span className="text-text-primary font-semibold">{filtered.length}</span>{' '}
-              {categoryName ? `${categoryName} products` : 'products'}
-            </p>
+            <h1 className="text-[28px] font-display font-bold text-text-primary capitalize mb-1 lg:mb-0">
+              {categoryName ? categoryName : 'All Products'}
+            </h1>
 
             {/* Active filter pills */}
             {inStockOnly && (
