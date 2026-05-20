@@ -8,30 +8,44 @@ export default function ChatWidget() {
   useEffect(() => {
     setMounted(true)
 
-    // Tawk.to Live Chat configuration
+    // Check if script is already present in DOM to prevent duplicate loads during hydration/navigation
+    if (document.getElementById('tawk-script-loader')) {
+      if ((window as any).Tawk_API && (window as any).Tawk_API.showWidget) {
+        try {
+          (window as any).Tawk_API.showWidget()
+        } catch (e) {
+          console.warn('Tawk.to showWidget failed:', e)
+        }
+      }
+      return
+    }
+
+    // Set up Tawk.to API globals
     const Tawk_API = (window as any).Tawk_API || {}
     const Tawk_LoadStart = new Date();
     (window as any).Tawk_API = Tawk_API
-
     Tawk_API.onLoad = function () {
       if (Tawk_API.showWidget) {
-        Tawk_API.showWidget()
+        try {
+          Tawk_API.showWidget()
+        } catch (e) {
+          console.error('Tawk.to onLoad showWidget error:', e)
+        }
       }
     }
 
     const s1 = document.createElement("script")
-    const s0 = document.getElementsByTagName("script")[0]
+    s1.id = 'tawk-script-loader'
     s1.async = true
     s1.src = 'https://embed.tawk.to/6a0b0c3ca536181c3989749e/1jotifk2t'
     s1.charset = 'UTF-8'
     s1.setAttribute('crossorigin', '*')
+
+    const s0 = document.getElementsByTagName("script")[0]
     if (s0 && s0.parentNode) {
       s0.parentNode.insertBefore(s1, s0)
-    }
-
-    return () => {
-      // Clean up script on unmount
-      s1.remove()
+    } else {
+      document.head.appendChild(s1)
     }
   }, [])
 
