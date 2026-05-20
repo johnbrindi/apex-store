@@ -33,5 +33,53 @@ export default function ProductPage({ params }: Props) {
     .filter((p) => p.id !== product.id && p.category_id === product.category_id)
     .slice(0, 4)
 
-  return <ProductDetailClient product={product} related={related} />
+  const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.buysteroidsuk.online'
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: product.name,
+    image: product.primary_image ? [product.primary_image] : [],
+    description: product.description || product.short_description || '',
+    sku: product.sku || product.slug,
+    mpn: product.id,
+    brand: {
+      '@type': 'Brand',
+      name: 'Steroids UK',
+    },
+    offers: {
+      '@type': 'Offer',
+      url: `${BASE_URL}/product/${product.slug}`,
+      priceCurrency: 'GBP',
+      price: product.price,
+      priceValidUntil: '2027-12-31',
+      itemCondition: 'https://schema.org/NewCondition',
+      availability: product.in_stock
+        ? 'https://schema.org/InStock'
+        : 'https://schema.org/OutOfStock',
+      seller: {
+        '@type': 'Organization',
+        name: 'Steroids UK',
+      },
+    },
+    ...(product.rating ? {
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: product.rating,
+        reviewCount: product.review_count || 12,
+        bestRating: '5',
+        worstRating: '1',
+      }
+    } : {})
+  }
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <ProductDetailClient product={product} related={related} />
+    </>
+  )
 }
