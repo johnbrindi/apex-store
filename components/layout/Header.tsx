@@ -40,32 +40,64 @@ export default function Header() {
   return (
     <header className="bg-white sticky top-0 z-50 shadow-sm">
       {/* Main header row */}
-      <div className="container-shop py-2.5 flex items-center gap-3">
-        {/* Mobile menu button */}
-        <button
-          onClick={toggleMobileNav}
-          className="lg:hidden p-1.5 text-text-primary hover:text-brand-teal transition-colors flex-shrink-0"
-          aria-label="Open menu"
-        >
-          {mobileNavOpen ? <X size={22} /> : <Menu size={22} />}
-        </button>
+      <div className="container-shop py-2 flex flex-col lg:flex-row lg:items-center gap-2 lg:gap-3">
+        <div className="flex items-center justify-between w-full lg:w-auto gap-3">
+          <div className="flex items-center gap-2">
+            {/* Mobile menu button */}
+            <button
+              onClick={toggleMobileNav}
+              className="lg:hidden p-1.5 text-text-primary hover:text-brand-teal transition-colors flex-shrink-0"
+              aria-label="Open menu"
+            >
+              {mobileNavOpen ? <X size={22} /> : <Menu size={22} />}
+            </button>
 
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 shrink-0">
-          <div className="flex items-center gap-1.5">
-            {/* Muscle/bodybuilder icon */}
-            <div className="w-10 h-10 bg-brand-header rounded-full flex items-center justify-center text-white text-lg font-bold">
-              💪
-            </div>
-            <div className="font-display font-bold text-sm md:text-base tracking-tight text-text-primary uppercase leading-tight">
-              <div className="text-brand-header">STEROIDS-UK</div>
-              <div className="text-text-secondary text-xs">.ONLINE</div>
-            </div>
+            {/* Logo */}
+            <Link href="/" className="flex items-center gap-2 shrink-0">
+              <div className="flex items-center gap-1.5">
+                {/* Muscle/bodybuilder icon */}
+                <div className="w-10 h-10 bg-brand-header rounded-full flex items-center justify-center text-white text-lg font-bold">
+                  💪
+                </div>
+                <div className="font-display font-bold text-sm md:text-base tracking-tight text-text-primary uppercase leading-tight">
+                  <div className="text-brand-header">STEROIDS-UK</div>
+                  <div className="text-text-secondary text-xs">.ONLINE</div>
+                </div>
+              </div>
+            </Link>
           </div>
-        </Link>
 
-        {/* Search bar - takes up most space */}
-        <div className="flex-1 max-w-2xl mx-2 md:mx-6">
+          {/* Right side for mobile (Cart & Account icons) */}
+          <div className="flex lg:hidden items-center gap-3 shrink-0">
+            {/* Account Icon */}
+            <Link
+              href={isLoggedIn ? "/my-account" : "/login"}
+              className="text-text-primary hover:text-brand-teal transition-colors"
+              aria-label="Account"
+            >
+              <User size={22} />
+            </Link>
+
+            {/* Cart */}
+            <button
+              onClick={openCart}
+              className="flex items-center gap-1.5 text-text-primary hover:text-brand-teal transition-colors"
+              aria-label="Cart"
+            >
+              <div className="relative">
+                <ShoppingBag size={22} />
+                {mounted && cartCount > 0 && (
+                  <span className="absolute -top-1.5 -right-1.5 flex items-center justify-center w-4 h-4 bg-button-blue text-white text-[10px] rounded-full font-bold">
+                    {cartCount}
+                  </span>
+                )}
+              </div>
+            </button>
+          </div>
+        </div>
+
+        {/* Search bar - takes up most space, full-width on mobile */}
+        <div className="flex-1 w-full lg:max-w-2xl lg:mx-6">
           <div className="relative flex border border-border-light">
             <input
               type="text"
@@ -84,12 +116,12 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Right side */}
-        <div className="flex items-center gap-3 shrink-0">
-          {/* Login - hidden on very small screens */}
+        {/* Right side for desktop */}
+        <div className="hidden lg:flex items-center gap-4 shrink-0">
+          {/* Login */}
           <Link
             href={isLoggedIn ? "/my-account" : "/login"}
-            className="hidden sm:flex items-center gap-1 text-xs font-bold uppercase text-text-primary hover:text-brand-teal transition-colors whitespace-nowrap"
+            className="flex items-center gap-1 text-xs font-bold uppercase text-text-primary hover:text-brand-teal transition-colors whitespace-nowrap"
           >
             {mounted ? (isLoggedIn ? "MY ACCOUNT" : "LOGIN / REGISTER") : "LOGIN / REGISTER"}
           </Link>
@@ -108,7 +140,7 @@ export default function Header() {
                 </span>
               )}
             </div>
-            <span className="hidden sm:block text-xs font-bold">
+            <span className="text-xs font-bold">
               £{mounted ? cartTotal.toFixed(2) : '0.00'}
             </span>
           </button>

@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Barlow, Oswald } from 'next/font/google'
 import './globals.css'
 import Providers from '@/components/Providers'
+import ChatWidget from '@/components/layout/ChatWidget'
 import Script from 'next/script'
 
 const barlow = Barlow({
@@ -103,20 +104,7 @@ export default function RootLayout({
           {children}
         </Providers>
 
-        {/* Live Chat Widget (Tawk.to) */}
-        <Script id="tawk-live-chat" strategy="afterInteractive">
-          {`
-            var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-            (function(){
-            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-            s1.async=true;
-            s1.src='https://embed.tawk.to/6a0b0c3ca536181c3989749e/1jotifk2t';
-            s1.charset='UTF-8';
-            s1.setAttribute('crossorigin','*');
-            s0.parentNode.insertBefore(s1,s0);
-            })();
-          `}
-        </Script>
+        <ChatWidget />
       </body>
     </html>
   )
