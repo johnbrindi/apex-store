@@ -4,37 +4,53 @@ import { useEffect, useState } from 'react'
 
 export default function ChatWidget() {
   const [mounted, setMounted] = useState(false)
+  const [isTawkReady, setIsTawkReady] = useState(false)
 
   useEffect(() => {
     setMounted(true)
 
-    // Check if script is already present in DOM to prevent duplicate loads during hydration/navigation
-    if (document.getElementById('tawk-script-loader')) {
-      if ((window as any).Tawk_API && (window as any).Tawk_API.showWidget) {
+    // Setup Tawk_API and hook onLoad/onBeforeLoad events
+    const Tawk_API = (window as any).Tawk_API || {}
+    const Tawk_LoadStart = new Date()
+    
+    Tawk_API.onBeforeLoad = function () {
+      if (Tawk_API.hideWidget) {
         try {
-          (window as any).Tawk_API.showWidget()
+          Tawk_API.hideWidget()
         } catch (e) {
-          console.warn('Tawk.to showWidget failed:', e)
+          console.warn('Tawk.to hideWidget failed during beforeLoad:', e)
+        }
+      }
+    }
+
+    Tawk_API.onLoad = function () {
+      setIsTawkReady(true)
+      if (Tawk_API.hideWidget) {
+        try {
+          Tawk_API.hideWidget()
+        } catch (e) {
+          console.warn('Tawk.to hideWidget failed on load:', e)
+        }
+      }
+    };
+
+    (window as any).Tawk_API = Tawk_API
+
+    // Check if script is already present in DOM to prevent duplicates
+    let s1 = document.getElementById('tawk-script-loader') as HTMLScriptElement
+    if (s1) {
+      if ((window as any).Tawk_API && (window as any).Tawk_API.hideWidget) {
+        try {
+          (window as any).Tawk_API.hideWidget()
+          setIsTawkReady(true)
+        } catch (e) {
+          console.warn('Tawk.to init failed:', e)
         }
       }
       return
     }
 
-    // Set up Tawk.to API globals
-    const Tawk_API = (window as any).Tawk_API || {}
-    const Tawk_LoadStart = new Date();
-    (window as any).Tawk_API = Tawk_API
-    Tawk_API.onLoad = function () {
-      if (Tawk_API.showWidget) {
-        try {
-          Tawk_API.showWidget()
-        } catch (e) {
-          console.error('Tawk.to onLoad showWidget error:', e)
-        }
-      }
-    }
-
-    const s1 = document.createElement("script")
+    s1 = document.createElement("script")
     s1.id = 'tawk-script-loader'
     s1.async = true
     s1.src = 'https://embed.tawk.to/6a0b0c3ca536181c3989749e/1jotifk2t'
@@ -49,10 +65,27 @@ export default function ChatWidget() {
     }
   }, [])
 
+  const handleOpenTawk = () => {
+    const Tawk_API = (window as any).Tawk_API
+    if (Tawk_API) {
+      try {
+        Tawk_API.showWidget()
+        Tawk_API.maximize()
+      } catch (e) {
+        console.error('Tawk.to failed to open:', e)
+        // Fallback: If for some reason the widget has a loading error, reload the script or direct link
+        window.open('https://tawk.to/chat/6a0b0c3ca536181c3989749e/1jotifk2t', '_blank')
+      }
+    } else {
+      // Fallback redirect to direct chat window if Tawk_API hasn't initialized
+      window.open('https://tawk.to/chat/6a0b0c3ca536181c3989749e/1jotifk2t', '_blank')
+    }
+  }
+
   if (!mounted) return null
 
   return (
-    <div className="fixed right-[20px] bottom-[95px] md:bottom-[100px] z-[99999] flex flex-col items-center gap-3 select-none">
+    <div className="fixed right-[20px] bottom-[20px] z-[99999] flex flex-col items-center gap-3 select-none">
       {/* WhatsApp floating button with tooltip and pulsing ripple */}
       <a
         href="https://wa.me/message/WZDFVTAYKKLMJ1"
@@ -79,11 +112,46 @@ export default function ChatWidget() {
           />
         </svg>
 
-        {/* Hover Tooltip tooltip */}
+        {/* Hover Tooltip */}
         <span className="absolute right-full mr-3 top-1/2 -translate-y-1/2 scale-0 group-hover:scale-100 transition-all duration-200 origin-right whitespace-nowrap bg-zinc-900 text-white text-xs font-bold py-1.5 px-3 rounded shadow-md pointer-events-none uppercase tracking-wider">
           Chat on WhatsApp
         </span>
       </a>
+
+      {/* Custom Tawk.to Live Chat floating button */}
+      <button
+        onClick={handleOpenTawk}
+        className="group relative flex items-center justify-center w-[54px] h-[54px] md:w-[60px] md:h-[60px] rounded-full bg-gradient-to-tr from-[#173436] to-[#1E3D3F] text-white shadow-[0_4px_16px_rgba(23,52,54,0.45)] hover:shadow-[0_6px_22px_rgba(23,52,54,0.65)] border border-[#315B4C]/40 hover:border-[#315B4C]/80 transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer"
+        aria-label="Open Live Chat"
+        title="Chat with Live Support"
+      >
+        {/* Pulsing online support status indicator dot */}
+        <span className="absolute top-[2px] right-[2px] flex h-3.5 w-3.5">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-500 border-2 border-[#1E3D3F]"></span>
+        </span>
+
+        {/* Live Chat Speech Bubble SVG Icon */}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth="2"
+          stroke="currentColor"
+          className="w-6 h-6 md:w-7 md:h-7 transition-transform duration-300 group-hover:-translate-y-0.5"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 18c-.987 0-1.912-.401-2.594-1.042a.75.75 0 01-.11-.8l1.055-2.508C3.27 13.245 3 12.138 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z"
+          />
+        </svg>
+
+        {/* Hover Tooltip */}
+        <span className="absolute right-full mr-3 top-1/2 -translate-y-1/2 scale-0 group-hover:scale-100 transition-all duration-200 origin-right whitespace-nowrap bg-zinc-900 text-white text-xs font-bold py-1.5 px-3 rounded shadow-md pointer-events-none uppercase tracking-wider">
+          Live Chat Support
+        </span>
+      </button>
     </div>
   )
 }
