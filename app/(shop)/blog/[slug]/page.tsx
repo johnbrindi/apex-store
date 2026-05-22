@@ -6,6 +6,8 @@ import { Calendar, Tag, ArrowLeft, ArrowRight, Clock } from 'lucide-react'
 import { blogPosts } from '@/data/mock'
 import { formatDate } from '@/lib/utils'
 
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.buysteroidsuk.online'
+
 interface Props {
   params: { slug: string }
 }
@@ -13,13 +15,26 @@ interface Props {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = blogPosts.find((p) => p.slug === params.slug)
   if (!post) return { title: 'Post Not Found' }
+  const postUrl = `${BASE_URL}/blog/${post.slug}`
   return {
     title: post.title,
     description: post.excerpt,
+    alternates: { canonical: postUrl },
+    keywords: post.tags ?? [],
     openGraph: {
+      type: 'article',
       title: post.title,
       description: post.excerpt,
-      images: post.cover_image ? [{ url: post.cover_image }] : [],
+      url: postUrl,
+      locale: 'en_GB',
+      images: post.cover_image ? [{ url: post.cover_image, width: 1200, height: 630 }] : [],
+      publishedTime: post.published_at ?? post.created_at,
+      tags: post.tags,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.excerpt,
     },
   }
 }
@@ -38,8 +53,27 @@ export default function BlogPostPage({ params }: Props) {
   const wordCount = post.content.split(/\s+/).length
   const readTime = Math.max(1, Math.ceil(wordCount / 200))
 
+  const articleJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.title,
+    description: post.excerpt,
+    url: `${BASE_URL}/blog/${post.slug}`,
+    image: post.cover_image ?? `${BASE_URL}/og-image.jpg`,
+    datePublished: post.published_at ?? post.created_at,
+    dateModified: post.published_at ?? post.created_at,
+    author: { '@type': 'Organization', name: 'Steroids UK', url: BASE_URL },
+    publisher: { '@type': 'Organization', name: 'Steroids UK', url: BASE_URL },
+    keywords: post.tags?.join(', '),
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `${BASE_URL}/blog/${post.slug}` },
+  }
+
   return (
     <div className="container-shop py-10 max-w-4xl mx-auto">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
       {/* Back */}
       <Link
         href="/blog"
@@ -211,14 +245,36 @@ export default function BlogPostPage({ params }: Props) {
             }
           }
 
-          // Bold inline handling
+          // Inline renderer: supports **bold** and [link text](url)
           const renderInline = (text: string) => {
-            const parts = text.split(/(\*\*[^*]+\*\*)/g)
-            return parts.map((part, pi) => {
-              if (part.startsWith('**') && part.endsWith('**')) {
-                return <strong key={pi} className="font-semibold text-text-primary">{part.slice(2, -2)}</strong>
+            // First split on markdown links [text](url)
+            const linkParts = text.split(/(\[[^\]]+\]\([^)]+\))/g)
+            return linkParts.map((segment, si) => {
+              const linkMatch = segment.match(/^\[([^\]]+)\]\(([^)]+)\)$/)
+              if (linkMatch) {
+                const [, linkText, href] = linkMatch
+                const isInternal = href.startsWith('/')
+                if (isInternal) {
+                  return (
+                    <Link key={si} href={href} className="text-brand-red hover:text-brand-red-light underline underline-offset-2 transition-colors">
+                      {linkText}
+                    </Link>
+                  )
+                }
+                return (
+                  <a key={si} href={href} target="_blank" rel="noopener noreferrer" className="text-brand-red hover:text-brand-red-light underline underline-offset-2 transition-colors">
+                    {linkText}
+                  </a>
+                )
               }
-              return part
+              // Then handle **bold** within the segment
+              const boldParts = segment.split(/(\*\*[^*]+\*\*)/g)
+              return boldParts.map((part, pi) => {
+                if (part.startsWith('**') && part.endsWith('**')) {
+                  return <strong key={`${si}-${pi}`} className="font-semibold text-text-primary">{part.slice(2, -2)}</strong>
+                }
+                return <span key={`${si}-${pi}`}>{part}</span>
+              })
             })
           }
 

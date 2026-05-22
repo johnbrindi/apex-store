@@ -79,16 +79,54 @@ export default function RootLayout({
 }) {
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'WebStore',
-    name: 'Steroids UK',
-    description: 'Buy the best quality steroids in the UK. Premium pharmaceutical-grade performance compounds.',
-    url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.buysteroidsuk.online',
-    image: `${process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.buysteroidsuk.online'}/assets/images/logo.png`,
-    address: {
-      '@type': 'PostalAddress',
-      addressCountry: 'UK'
-    },
-    priceRange: '££'
+    '@graph': [
+      {
+        '@type': 'WebSite',
+        '@id': `${process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.buysteroidsuk.online'}/#website`,
+        name: 'Steroids UK',
+        url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.buysteroidsuk.online',
+        description: 'The most trusted UK steroids shop. Buy pharmaceutical-grade anabolic steroids, SARMs, peptides, and PCT products online in the UK.',
+        potentialAction: {
+          '@type': 'SearchAction',
+          target: {
+            '@type': 'EntryPoint',
+            urlTemplate: `${process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.buysteroidsuk.online'}/search?q={search_term_string}`,
+          },
+          'query-input': 'required name=search_term_string',
+        },
+      },
+      {
+        '@type': 'Store',
+        '@id': `${process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.buysteroidsuk.online'}/#store`,
+        name: 'Steroids UK — Buy Anabolic Steroids Online',
+        description: 'UK-based online store specialising in pharmaceutical-grade anabolic steroids, injectable testosterone, oral compounds, SARMs, peptides, and PCT products. Lab tested. Discreet delivery.',
+        url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.buysteroidsuk.online',
+        image: `${process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.buysteroidsuk.online'}/og-image.jpg`,
+        priceRange: '££',
+        currenciesAccepted: 'GBP',
+        paymentAccepted: 'Bank Transfer, Cryptocurrency, Revolut',
+        areaServed: {
+          '@type': 'Country',
+          name: 'United Kingdom',
+        },
+        address: {
+          '@type': 'PostalAddress',
+          addressCountry: 'GB',
+        },
+        hasOfferCatalog: {
+          '@type': 'OfferCatalog',
+          name: 'Anabolic Steroids UK',
+          itemListElement: [
+            { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Injectable Steroids UK' } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Oral Steroids UK' } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'SARMs UK' } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'PCT & Support UK' } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'HGH & Peptides UK' } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Fat Burners UK' } },
+          ],
+        },
+      },
+    ],
   }
 
   return (

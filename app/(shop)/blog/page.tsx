@@ -6,11 +6,27 @@ import { blogPosts } from '@/data/mock'
 import { formatDate } from '@/lib/utils'
 
 export const metadata: Metadata = {
-  title: 'Blog & Guides',
-  description: 'Expert guides on performance compounds, cycle planning, PCT protocols, and more.',
+  title: 'Steroids UK Blog & Guides | Cycles, PCT, Dosage & Safe Buying',
+  description:
+    'Expert UK steroids guides covering anabolic cycles, PCT protocols, injectable vs oral steroids, testosterone dosage, cutting and bulking stacks, and safe buying advice. Written for UK athletes.',
+  keywords: [
+    'steroids guide uk',
+    'anabolic steroids guide',
+    'steroid cycle guide uk',
+    'pct guide uk',
+    'how to buy steroids uk',
+    'injectable steroids guide',
+    'oral steroids uk',
+    'testosterone cycle uk',
+    'best steroids for cutting uk',
+    'buy anavar uk guide',
+  ],
+  alternates: {
+    canonical: `${process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.buysteroidsuk.online'}/blog`,
+  },
 }
 
-const allCategories = ['All', 'Training Guides', 'PCT Guide', 'Education', 'Nutrition']
+const allCategories = ['All', 'Training Guides', 'PCT Guide', 'Education', 'Nutrition', 'Safe Buying']
 
 export default function BlogPage() {
   return (
@@ -34,11 +50,10 @@ export default function BlogPage() {
         {allCategories.map((cat) => (
           <button
             key={cat}
-            className={`px-4 py-1.5 text-xs font-semibold uppercase tracking-wide border transition-colors ${
-              cat === 'All'
+            className={`px-4 py-1.5 text-xs font-semibold uppercase tracking-wide border transition-colors ${cat === 'All'
                 ? 'bg-brand-red border-brand-red text-white'
                 : 'border-surface-200 text-text-muted hover:border-surface-300 hover:text-white'
-            }`}
+              }`}
           >
             {cat}
           </button>
