@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Calendar, Tag, ArrowLeft, ArrowRight, Clock } from 'lucide-react'
+import { Calendar, Tag, ArrowLeft, ArrowRight, Clock, ShieldCheck } from 'lucide-react'
 import { blogPosts } from '@/data/mock'
 import { formatDate } from '@/lib/utils'
 
@@ -63,6 +63,7 @@ export default function BlogPostPage({ params }: Props) {
     datePublished: post.published_at ?? post.created_at,
     dateModified: post.published_at ?? post.created_at,
     author: { '@type': 'Organization', name: 'Steroids UK', url: BASE_URL },
+    reviewedBy: post.medical_reviewer ? { '@type': 'Person', name: post.medical_reviewer } : undefined,
     publisher: { '@type': 'Organization', name: 'Steroids UK', url: BASE_URL },
     keywords: post.tags?.join(', '),
     mainEntityOfPage: { '@type': 'WebPage', '@id': `${BASE_URL}/blog/${post.slug}` },
@@ -99,6 +100,12 @@ export default function BlogPostPage({ params }: Props) {
             <span className="flex items-center gap-1.5">
               <Calendar size={13} />
               {formatDate(post.published_at)}
+            </span>
+          )}
+          {post.medical_reviewer && (
+            <span className="flex items-center gap-1.5 text-brand-primary">
+              <ShieldCheck size={13} />
+              Reviewed by {post.medical_reviewer}
             </span>
           )}
           <span className="flex items-center gap-1.5">

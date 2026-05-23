@@ -173,6 +173,7 @@ export interface BlogPost {
   author?: Profile
   category?: string
   tags?: string[]
+  medical_reviewer?: string
   published: boolean
   published_at?: string
   created_at: string
