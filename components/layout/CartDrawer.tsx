@@ -25,6 +25,8 @@ export default function CartDrawer() {
   const tot = total()
   const freeShippingThreshold = 149
   const remaining = freeShippingThreshold - sub
+  const MIN_ORDER_QTY = 2
+  const canCheckout = count >= MIN_ORDER_QTY
 
   useEffect(() => {
     if (isOpen) {
@@ -229,15 +231,32 @@ export default function CartDrawer() {
                   </div>
                 </div>
 
+                {/* Minimum order notice */}
+                {!canCheckout && (
+                  <div className="bg-amber-50 border border-amber-200 rounded px-3 py-2 text-xs text-amber-700 font-medium">
+                    ⚠ Minimum order is <strong>2 items</strong>. Please add more to proceed.
+                  </div>
+                )}
+
                 {/* CTA buttons */}
-                <Link
-                  href="/checkout"
-                  onClick={closeCart}
-                  className="flex items-center justify-center gap-2 w-full py-3.5 bg-button-blue hover:bg-button-hover text-white font-display font-bold uppercase tracking-wider transition-colors"
-                >
-                  Proceed to Checkout
-                  <ArrowRight size={16} />
-                </Link>
+                {canCheckout ? (
+                  <Link
+                    href="/checkout"
+                    onClick={closeCart}
+                    className="flex items-center justify-center gap-2 w-full py-3.5 bg-button-blue hover:bg-button-hover text-white font-display font-bold uppercase tracking-wider transition-colors"
+                  >
+                    Proceed to Checkout
+                    <ArrowRight size={16} />
+                  </Link>
+                ) : (
+                  <button
+                    disabled
+                    className="flex items-center justify-center gap-2 w-full py-3.5 bg-gray-300 text-gray-500 font-display font-bold uppercase tracking-wider cursor-not-allowed"
+                  >
+                    Proceed to Checkout
+                    <ArrowRight size={16} />
+                  </button>
+                )}
 
                 <Link
                   href="/cart"

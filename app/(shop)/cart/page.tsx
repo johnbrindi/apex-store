@@ -18,6 +18,9 @@ export default function CartPage() {
   const sub = subtotal()
   const tot = total()
   const shipping = sub >= 149 ? 0 : 4.99
+  const totalQty = items.reduce((s, i) => s + i.quantity, 0)
+  const MIN_ORDER_QTY = 2
+  const canCheckout = totalQty >= MIN_ORDER_QTY
 
   const handleCoupon = (e: React.FormEvent) => {
     e.preventDefault()
@@ -231,13 +234,30 @@ export default function CartPage() {
               </div>
             </div>
 
-            <Link
-              href="/checkout"
-              className="flex items-center justify-center gap-2 w-full py-4 bg-brand-red hover:bg-brand-red-dark text-white font-display font-bold uppercase tracking-wider transition-colors"
-            >
-              Proceed to Checkout
-              <ArrowRight size={16} />
-            </Link>
+            {/* Minimum order notice */}
+            {!canCheckout && (
+              <div className="mb-3 bg-amber-50 border border-amber-200 rounded px-3 py-2 text-xs text-amber-700 font-medium">
+                ⚠ Minimum order is <strong>2 items</strong>. Add more products to proceed.
+              </div>
+            )}
+
+            {canCheckout ? (
+              <Link
+                href="/checkout"
+                className="flex items-center justify-center gap-2 w-full py-4 bg-brand-red hover:bg-brand-red-dark text-white font-display font-bold uppercase tracking-wider transition-colors"
+              >
+                Proceed to Checkout
+                <ArrowRight size={16} />
+              </Link>
+            ) : (
+              <button
+                disabled
+                className="flex items-center justify-center gap-2 w-full py-4 bg-gray-300 text-gray-500 font-display font-bold uppercase tracking-wider cursor-not-allowed"
+              >
+                Proceed to Checkout
+                <ArrowRight size={16} />
+              </button>
+            )}
 
             <Link
               href="/shop"

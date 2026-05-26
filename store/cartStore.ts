@@ -29,14 +29,16 @@ export const useCartStore = create<CartStore>()(
       items: [],
       isOpen: false,
 
-      addItem: (product, quantity = 1) => {
+      addItem: (product, quantity = 2) => {
+        // Enforce minimum quantity of 2
+        const safeQty = Math.max(2, quantity)
         set((state) => {
           const existing = state.items.find((i) => i.product_id === product.id)
           if (existing) {
             return {
               items: state.items.map((i) =>
                 i.product_id === product.id
-                  ? { ...i, quantity: i.quantity + quantity }
+                  ? { ...i, quantity: i.quantity + safeQty }
                   : i
               ),
               isOpen: true,
@@ -46,7 +48,7 @@ export const useCartStore = create<CartStore>()(
             id: `${product.id}-${Date.now()}`,
             product_id: product.id,
             product,
-            quantity,
+            quantity: safeQty,
             price: product.price,
           }
           return { items: [...state.items, newItem], isOpen: true }
@@ -60,13 +62,15 @@ export const useCartStore = create<CartStore>()(
       },
 
       updateQuantity: (productId, quantity) => {
+        // Enforce minimum quantity of 2; remove only if going to 0 explicitly
         if (quantity <= 0) {
           get().removeItem(productId)
           return
         }
+        const safeQty = Math.max(2, quantity)
         set((state) => ({
           items: state.items.map((i) =>
-            i.product_id === productId ? { ...i, quantity } : i
+            i.product_id === productId ? { ...i, quantity: safeQty } : i
           ),
         }))
       },
