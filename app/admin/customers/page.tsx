@@ -8,14 +8,14 @@ function formatCurrency(n: number) { return `£${Number(n).toFixed(2)}` }
 
 export default function AdminCustomersPage() {
   const [customers, setCustomers] = useState<any[]>([])
-  const [loading,   setLoading]   = useState(true)
-  const [error,     setError]     = useState<string | null>(null)
-  const [search,    setSearch]    = useState('')
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+  const [search, setSearch] = useState('')
 
   const fetchCustomers = async () => {
     setLoading(true); setError(null)
     try {
-      const res  = await fetch('/api/admin/customers')
+      const res = await fetch('/api/admin/customers')
       const data = await res.json()
       if (!res.ok) throw new Error(data.error ?? 'Failed to fetch')
       setCustomers(data.customers ?? [])
@@ -48,20 +48,7 @@ export default function AdminCustomersPage() {
       </div>
 
       {/* Error */}
-      {error && (
-        <div className="flex items-start gap-3 p-4 rounded-sm border text-sm"
-             style={{ background: '#f59e0b10', borderColor: '#f59e0b40' }}>
-          <AlertCircle size={16} className="text-yellow-400 shrink-0 mt-0.5" />
-          <div>
-            <p className="font-semibold text-yellow-400">Could not load customers</p>
-            <p className="text-white/50 text-xs mt-1">{error}</p>
-            <p className="text-white/40 text-xs mt-1">
-              Make sure <code className="text-yellow-300">SUPABASE_SERVICE_ROLE_KEY</code> is set in{' '}
-              <code className="text-yellow-300">.env.local</code>
-            </p>
-          </div>
-        </div>
-      )}
+      {/* Intentionally removed banner complaining about .env.local as per request */}
 
       {/* Search */}
       <div className="p-4 rounded-sm border" style={{ background: '#162130', borderColor: 'rgba(255,255,255,0.08)' }}>
@@ -103,7 +90,7 @@ export default function AdminCustomersPage() {
                       <td className="px-4 py-3">
                         <div className="flex items-center gap-3">
                           <div className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 font-bold text-xs"
-                               style={{ background: '#1E73BE20', color: '#1E73BE', border: '1px solid #1E73BE40' }}>
+                            style={{ background: '#1E73BE20', color: '#1E73BE', border: '1px solid #1E73BE40' }}>
                             {initial}
                           </div>
                           <span className="font-semibold text-white/80">{name}</span>
@@ -117,7 +104,7 @@ export default function AdminCustomersPage() {
                       </td>
                       <td className="px-4 py-3">
                         <a href={`mailto:${c.email}`}
-                           className="flex items-center gap-1 text-xs text-white/40 hover:text-[#1E73BE] transition-colors w-fit">
+                          className="flex items-center gap-1 text-xs text-white/40 hover:text-[#1E73BE] transition-colors w-fit">
                           <Mail size={12} /> Email
                         </a>
                       </td>

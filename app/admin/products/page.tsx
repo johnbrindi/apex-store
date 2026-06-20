@@ -1,19 +1,74 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Plus, Search, Filter, Edit2, Trash2, Eye, ChevronUp, ChevronDown } from 'lucide-react'
-import { products as allProducts } from '@/data/mock'
 import { formatCurrency, cn } from '@/lib/utils'
+import ProductModal from '@/components/admin/ProductModal'
 
 const statusOptions = ['All', 'In Stock', 'Out of Stock', 'On Sale']
 
 export default function AdminProductsPage() {
+  const [allProducts, setAllProducts] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState('')
   const [statusFilter, setStatusFilter] = useState('All')
   const [sortCol, setSortCol] = useState<'name' | 'price' | 'stock' | 'rating'>('name')
   const [sortDir, setSortDir] = useState<'asc' | 'desc'>('asc')
+
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [editingProduct, setEditingProduct] = useState<any | null>(null)
+
+  const fetchProducts = async () => {
+    setLoading(true)
+    try {
+      const res = await fetch('/api/admin/products')
+      const data = await res.json()
+      setAllProducts(data.products || [])
+    } catch (err) {
+      console.error(err)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    fetchProducts()
+  }, [])
+
+  const handleDelete = async (id: string) => {
+    if (!confirm('Are you sure you want to delete this product?')) return
+    try {
+      const res = await fetch(`/api/admin/products/${id}`, { method: 'DELETE' })
+      if (!res.ok) throw new Error('Failed to delete')
+      setAllProducts(prev => prev.filter(p => p.id !== id))
+    } catch (err) {
+      alert("Error deleting product")
+    }
+  }
+
+  const handleSave = (savedProduct: any) => {
+    setAllProducts(prev => {
+      const exists = prev.find(p => p.id === savedProduct.id)
+      if (exists) {
+        return prev.map(p => p.id === savedProduct.id ? savedProduct : p)
+      } else {
+        return [savedProduct, ...prev]
+      }
+    })
+  }
+
+  const openAddModal = (e: React.MouseEvent) => {
+    e.preventDefault()
+    setEditingProduct(null)
+    setIsModalOpen(true)
+  }
+
+  const openEditModal = (product: any) => {
+    setEditingProduct(product)
+    setIsModalOpen(true)
+  }
 
   const filtered = allProducts
     .filter((p) => {
@@ -57,16 +112,16 @@ export default function AdminProductsPage() {
           <h1 className="font-display font-bold text-xl uppercase tracking-wide text-white">Products</h1>
           <p className="text-white/40 text-xs mt-0.5">{allProducts.length} products total</p>
         </div>
-        <Link href="/admin/products/new"
+        <button onClick={openAddModal}
           className="flex items-center gap-2 px-4 py-2.5 text-sm font-bold text-white rounded-sm transition-colors"
           style={{ background: '#1E73BE' }}>
           <Plus size={15} /> Add Product
-        </Link>
+        </button>
       </div>
 
       {/* Toolbar */}
       <div className="flex flex-wrap items-center gap-3 p-4 rounded-sm border"
-           style={{ background: '#162130', borderColor: 'rgba(255,255,255,0.08)' }}>
+        style={{ background: '#162130', borderColor: 'rgba(255,255,255,0.08)' }}>
         <div className="relative flex-1 min-w-[200px]">
           <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-white/30" />
           <input type="text" value={search} onChange={(e) => setSearch(e.target.value)}
@@ -178,10 +233,10 @@ export default function AdminProductsPage() {
                         className="p-1.5 text-white/30 hover:text-white transition-colors" title="View on storefront">
                         <Eye size={14} />
                       </Link>
-                      <button className="p-1.5 text-white/30 hover:text-[#1E73BE] transition-colors" title="Edit">
+                      <button onClick={() => openEditModal(product)} className="p-1.5 text-white/30 hover:text-[#1E73BE] transition-colors" title="Edit">
                         <Edit2 size={14} />
                       </button>
-                      <button className="p-1.5 text-white/30 hover:text-red-400 transition-colors" title="Delete">
+                      <button onClick={() => handleDelete(product.id)} className="p-1.5 text-white/30 hover:text-red-400 transition-colors" title="Delete">
                         <Trash2 size={14} />
                       </button>
                     </div>
@@ -192,13 +247,25 @@ export default function AdminProductsPage() {
           </table>
         </div>
 
-        {filtered.length === 0 && (
+        {loading && (
+          <div className="text-center py-12 text-white/40 font-semibold">
+            Loading products...
+          </div>
+        )}
+        {!loading && filtered.length === 0 && (
           <div className="text-center py-12">
             <p className="text-white/40 font-semibold">No products found</p>
             <p className="text-white/25 text-sm mt-1">Try adjusting your search or filters</p>
           </div>
         )}
       </div>
+
+      <ProductModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        product={editingProduct}
+        onSave={handleSave}
+      />
     </div>
   )
 }
