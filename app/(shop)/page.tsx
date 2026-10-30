@@ -7,7 +7,7 @@ import TrustStrip from '@/components/shop/TrustStrip'
 import ReviewsSection from '@/components/shop/ReviewsSection'
 import Link from 'next/link'
 
-import Image from 'next/image'
+import Image from '@/components/ui/SafeImage'
 
 export const metadata: Metadata = {
   title: 'Steroids UK — Buy Anabolic Steroids Online | UK Steroids Shop',
@@ -61,7 +61,7 @@ export default function HomePage() {
             {/* Image Column */}
             <div className="w-full md:w-1/2 relative min-h-[300px]">
               <Image
-                src="https://steroids-uk.com/wp-content/uploads/2025/11/muscle-400x267.webp"
+                src="/assets/images/imgi_183_muscle-400x267.webp"
                 alt="Bodybuilder"
                 fill
                 className="object-cover shadow-lg"

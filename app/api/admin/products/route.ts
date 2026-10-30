@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import fs from 'fs'
 import path from 'path'
+import { getAdminUser } from '@/lib/session'
 
 export async function GET() {
     try {
@@ -14,6 +15,9 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
+    if (!getAdminUser()) {
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
     try {
         const newProduct = await req.json()
         const filePath = path.join(process.cwd(), 'data', 'products.json')

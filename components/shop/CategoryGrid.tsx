@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
+import Image from '@/components/ui/SafeImage'
 
 const featuredCategories = [
   { slug: 'testosterone-steroids', label: 'Testosterone Steroids', image: '/assets/images/imgi_206_1MiLJjXmPhA-700x467.webp' },

@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import Image from 'next/image'
+import Image from '@/components/ui/SafeImage'
 import { Search, X, ArrowRight, TrendingUp } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useUIStore } from '@/store/uiStore'
@@ -131,7 +131,7 @@ export default function SearchModal() {
                     >
                       <div className="w-10 h-10 bg-surface shrink-0 overflow-hidden">
                         <Image
-                          src={product.primary_image ?? '/assets/images/placeholder.jpg'}
+                          src={product.primary_image ?? '/assets/images/placeholder.svg'}
                           alt={product.name}
                           width={40}
                           height={40}

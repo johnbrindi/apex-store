@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
+import Image from '@/components/ui/SafeImage'
 import { useCartStore } from '@/store/cartStore'
 import { formatCurrency, getDiscountPercent } from '@/lib/utils'
 import type { Product } from '@/types'
@@ -37,7 +37,7 @@ export default function ProductCard({ product }: ProductCardProps) {
       {/* Image */}
       <Link href={`/product/${product.slug}`} className="block overflow-hidden bg-white aspect-square relative mb-4">
         <Image
-          src={product.primary_image ?? '/assets/images/placeholder.jpg'}
+          src={product.primary_image ?? '/assets/images/placeholder.svg'}
           alt={product.name}
           width={300}
           height={300}

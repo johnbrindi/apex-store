@@ -1,8 +1,12 @@
 import { NextResponse } from 'next/server'
 import fs from 'fs'
 import path from 'path'
+import { getAdminUser } from '@/lib/session'
 
 export async function PUT(req: Request, { params }: { params: { id: string } }) {
+    if (!getAdminUser()) {
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
     try {
         const id = params.id
         const updates = await req.json()
@@ -25,6 +29,9 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
 }
 
 export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+    if (!getAdminUser()) {
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
     try {
         const id = params.id
         const filePath = path.join(process.cwd(), 'data', 'products.json')

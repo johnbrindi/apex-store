@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
+import Image from '@/components/ui/SafeImage'
 import { X, Minus, Plus, ShoppingBag, Trash2, ArrowRight } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useCartStore } from '@/store/cartStore'
@@ -145,7 +145,7 @@ export default function CartDrawer() {
                       className="shrink-0 w-16 h-16 bg-white overflow-hidden"
                     >
                       <Image
-                        src={item.product.primary_image ?? '/assets/images/placeholder.jpg'}
+                        src={item.product.primary_image ?? '/assets/images/placeholder.svg'}
                         alt={item.product.name}
                         width={64}
                         height={64}

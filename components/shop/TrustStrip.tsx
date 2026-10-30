@@ -1,61 +1,61 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
+import Image from '@/components/ui/SafeImage'
 
-// Using actual illustrated character images from steroids-uk.com
+// Illustrated trust-badge images, served from public/assets/images
 const features = [
   {
-    image: 'https://steroids-uk.com/wp-content/uploads/2025/10/top-uk-store-steroids-ukcom-e1761588952987-70x70.webp',
+    image: '/assets/images/imgi_64_top-uk-store-steroids-ukcom-e1761588952987-70x70.webp',
     title: 'Top UK Store',
     subtitle: 'Offering 1,000+ products',
     href: '/shop',
     fallback: '👑',
   },
   {
-    image: 'https://steroids-uk.com/wp-content/uploads/2025/10/low-prices-steroids-ukcom-1-70x70.webp',
+    image: '/assets/images/imgi_66_low-prices-steroids-ukcom-1-70x70.webp',
     title: 'Low Prices',
     subtitle: 'Best prices guaranteed.',
     href: '/shop',
     fallback: '💰',
   },
   {
-    image: 'https://steroids-uk.com/wp-content/uploads/2025/10/next-day-delivery-steroids-uk.com_-70x70.webp',
+    image: '/assets/images/imgi_68_next-day-delivery-steroids-uk.com_-70x70.webp',
     title: 'Next Day Delivery',
     subtitle: 'Order before 2PM',
     href: '/shipping',
     fallback: '🚚',
   },
   {
-    image: 'https://steroids-uk.com/wp-content/uploads/2025/10/anabolic-steroids-steroid-ukcom-70x70.webp',
+    image: '/assets/images/imgi_70_anabolic-steroids-steroid-ukcom-70x70.webp',
     title: 'The Best Anabolic Steroids Shop in Great Britain',
     subtitle: '',
     href: '/shop',
     fallback: '🏆',
   },
   {
-    image: 'https://steroids-uk.com/wp-content/uploads/2025/10/fat-burners-steorids-ukcom-70x70.webp',
+    image: '/assets/images/imgi_72_fat-burners-steorids-ukcom-70x70.webp',
     title: 'The Strongest Fat Burners',
     subtitle: '',
     href: '/shop/fat-burners',
     fallback: '🔥',
   },
   {
-    image: 'https://steroids-uk.com/wp-content/uploads/2025/10/laboratory-tested-steroids-ukcom-70x70.webp',
+    image: '/assets/images/imgi_74_laboratory-tested-steroids-ukcom-70x70.webp',
     title: 'Laboratory Tested Steroids For Sale',
     subtitle: 'Check laboratory tests',
     href: '/lab-tests',
     fallback: '🔬',
   },
   {
-    image: 'https://steroids-uk.com/wp-content/uploads/2025/10/secure-payment-steroids-ukcom-70x70.webp',
+    image: '/assets/images/imgi_76_secure-payment-steroids-ukcom-70x70.webp',
     title: 'Secure Payment',
     subtitle: '100% secure payments',
     href: '/payments',
     fallback: '💳',
   },
   {
-    image: 'https://steroids-uk.com/wp-content/uploads/2025/10/europe-and-usa-steroids-ukcom-70x70.webp',
+    image: '/assets/images/imgi_78_europe-and-usa-steroids-ukcom-70x70.webp',
     title: 'Europe and USA store warehouse option',
     subtitle: '',
     href: '/shop',

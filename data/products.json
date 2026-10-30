@@ -13,12 +13,12 @@
     "is_featured": true,
     "is_on_sale": false,
     "category_id": "cat-8",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2022/03/kamagra-effervescent-100mg-tablets-1-500x500-1-300x300.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-1",
         "product_id": "prod-1",
-        "url": "https://steroids-uk.com/wp-content/uploads/2022/03/kamagra-effervescent-100mg-tablets-1-500x500-1-300x300.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -46,12 +46,12 @@
     "is_featured": true,
     "is_on_sale": false,
     "category_id": "cat-8",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2017/11/Super-Kamagra-300x300.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-2",
         "product_id": "prod-2",
-        "url": "https://steroids-uk.com/wp-content/uploads/2017/11/Super-Kamagra-300x300.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -79,12 +79,12 @@
     "is_featured": true,
     "is_on_sale": false,
     "category_id": "cat-8",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2026/01/cialis-300x300.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-3",
         "product_id": "prod-3",
-        "url": "https://steroids-uk.com/wp-content/uploads/2026/01/cialis-300x300.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -112,12 +112,12 @@
     "is_featured": true,
     "is_on_sale": false,
     "category_id": "cat-1",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2025/11/prilimed-30_blister-300x300.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-4",
         "product_id": "prod-4",
-        "url": "https://steroids-uk.com/wp-content/uploads/2025/11/prilimed-30_blister-300x300.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -145,12 +145,12 @@
     "is_featured": true,
     "is_on_sale": true,
     "category_id": "cat-4",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2023/01/b-lgd-4033-ligandrol-pharmaqo-300x300.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-5",
         "product_id": "prod-5",
-        "url": "https://steroids-uk.com/wp-content/uploads/2023/01/b-lgd-4033-ligandrol-pharmaqo-300x300.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -178,12 +178,12 @@
     "is_featured": true,
     "is_on_sale": false,
     "category_id": "cat-4",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2020/08/imusclesarmsuk-ligandrollgd4033_1024x1024@2x-1-300x300.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-6",
         "product_id": "prod-6",
-        "url": "https://steroids-uk.com/wp-content/uploads/2020/08/imusclesarmsuk-ligandrollgd4033_1024x1024@2x-1-300x300.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -211,12 +211,12 @@
     "is_featured": true,
     "is_on_sale": false,
     "category_id": "cat-5",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2024/05/Proscalpin-1-agm22mL-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-7",
         "product_id": "prod-7",
-        "url": "https://steroids-uk.com/wp-content/uploads/2024/05/Proscalpin-1-agm22mL-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -244,12 +244,12 @@
     "is_featured": true,
     "is_on_sale": false,
     "category_id": "cat-5",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2024/02/finax_1mg_tablet_30s_35081_0_1-300x300.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-8",
         "product_id": "prod-8",
-        "url": "https://steroids-uk.com/wp-content/uploads/2024/02/finax_1mg_tablet_30s_35081_0_1-300x300.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -277,12 +277,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-2",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2024/09/testosterone-gel-500x500-1.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-9",
         "product_id": "prod-9",
-        "url": "https://steroids-uk.com/wp-content/uploads/2024/09/testosterone-gel-500x500-1.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -310,12 +310,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-5-2",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2021/12/anastrazol-neola-front.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-10",
         "product_id": "prod-10",
-        "url": "https://steroids-uk.com/wp-content/uploads/2021/12/anastrazol-neola-front.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -343,12 +343,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-5",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2024/10/liv-52-himalaya-700x700.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-11",
         "product_id": "prod-11",
-        "url": "https://steroids-uk.com/wp-content/uploads/2024/10/liv-52-himalaya-700x700.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -376,12 +376,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-5-2",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2015/11/terpafen-clomifenec-citrate-50-mg-500x500-1.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-12",
         "product_id": "prod-12",
-        "url": "https://steroids-uk.com/wp-content/uploads/2015/11/terpafen-clomifenec-citrate-50-mg-500x500-1.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -409,12 +409,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-4",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2020/08/imusclesarmsuk-ibutamorenmk677_1024x1024@2x-700x700.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-13",
         "product_id": "prod-13",
-        "url": "https://steroids-uk.com/wp-content/uploads/2020/08/imusclesarmsuk-ibutamorenmk677_1024x1024@2x-700x700.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -442,12 +442,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-4",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2020/08/imusclesarmsuk-cardarinegw501516_1024x1024@2x-700x700.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-14",
         "product_id": "prod-14",
-        "url": "https://steroids-uk.com/wp-content/uploads/2020/08/imusclesarmsuk-cardarinegw501516_1024x1024@2x-700x700.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -475,12 +475,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-4",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2020/08/S-23_1024x1024@2x-700x700.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-15",
         "product_id": "prod-15",
-        "url": "https://steroids-uk.com/wp-content/uploads/2020/08/S-23_1024x1024@2x-700x700.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -508,12 +508,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-1",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2026/01/oxy-caps-V2-700x700.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-16",
         "product_id": "prod-16",
-        "url": "https://steroids-uk.com/wp-content/uploads/2026/01/oxy-caps-V2-700x700.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -541,12 +541,12 @@
     "is_featured": false,
     "is_on_sale": true,
     "category_id": "cat-1",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2026/01/anapolon-700x700.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-17",
         "product_id": "prod-17",
-        "url": "https://steroids-uk.com/wp-content/uploads/2026/01/anapolon-700x700.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -574,12 +574,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-1",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2026/02/Winstrol-Lite-Beligas-1-700x700.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-18",
         "product_id": "prod-18",
-        "url": "https://steroids-uk.com/wp-content/uploads/2026/02/Winstrol-Lite-Beligas-1-700x700.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -607,12 +607,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-1",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2026/01/winstrol-700x700.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-19",
         "product_id": "prod-19",
-        "url": "https://steroids-uk.com/wp-content/uploads/2026/01/winstrol-700x700.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -640,12 +640,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-1",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2026/01/winstrol-caps-V2-700x700.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-20",
         "product_id": "prod-20",
-        "url": "https://steroids-uk.com/wp-content/uploads/2026/01/winstrol-caps-V2-700x700.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -673,12 +673,12 @@
     "is_featured": false,
     "is_on_sale": true,
     "category_id": "cat-5",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2015/11/PROVIRON3-700x700.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-21",
         "product_id": "prod-21",
-        "url": "https://steroids-uk.com/wp-content/uploads/2015/11/PROVIRON3-700x700.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -706,12 +706,12 @@
     "is_featured": false,
     "is_on_sale": true,
     "category_id": "cat-5",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2025/05/post-cycle-therapy-pct-700x700.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-22",
         "product_id": "prod-22",
-        "url": "https://steroids-uk.com/wp-content/uploads/2025/05/post-cycle-therapy-pct-700x700.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -739,12 +739,12 @@
     "is_featured": false,
     "is_on_sale": true,
     "category_id": "cat-5",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2020/08/zymoplex-500x500-500x500-500x500-1.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-23",
         "product_id": "prod-23",
-        "url": "https://steroids-uk.com/wp-content/uploads/2020/08/zymoplex-500x500-500x500-500x500-1.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -772,12 +772,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-5",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2022/02/Nolvadex-D-AStra-700x700.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-24",
         "product_id": "prod-24",
-        "url": "https://steroids-uk.com/wp-content/uploads/2022/02/Nolvadex-D-AStra-700x700.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -805,12 +805,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-5",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2024/05/tamoxifen-uk.webp",
+    "primary_image": "/assets/images/imgi_152_tamoxifen-front-300x300.webp",
     "images": [
       {
         "id": "img-25",
         "product_id": "prod-25",
-        "url": "https://steroids-uk.com/wp-content/uploads/2024/05/tamoxifen-uk.webp",
+        "url": "/assets/images/imgi_152_tamoxifen-front-300x300.webp",
         "position": 0,
         "is_primary": true
       }
@@ -838,12 +838,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-1",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2022/05/Pro-Turinabol-10_front-1-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-26",
         "product_id": "prod-26",
-        "url": "https://steroids-uk.com/wp-content/uploads/2022/05/Pro-Turinabol-10_front-1-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -871,12 +871,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-1",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2023/12/pharmaqo-labs-turinabol-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-27",
         "product_id": "prod-27",
-        "url": "https://steroids-uk.com/wp-content/uploads/2023/12/pharmaqo-labs-turinabol-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -904,12 +904,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-1",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2022/03/pro-dianabol-10-front-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-28",
         "product_id": "prod-28",
-        "url": "https://steroids-uk.com/wp-content/uploads/2022/03/pro-dianabol-10-front-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -937,12 +937,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-2",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2025/07/Test-C-5-2-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-29",
         "product_id": "prod-29",
-        "url": "https://steroids-uk.com/wp-content/uploads/2025/07/Test-C-5-2-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -970,12 +970,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-2",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2022/03/PROPER-CYP-200-scaled-1-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-30",
         "product_id": "prod-30",
-        "url": "https://steroids-uk.com/wp-content/uploads/2022/03/PROPER-CYP-200-scaled-1-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -1003,12 +1003,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-2",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2026/02/Cypo-Testosterone-200mg-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-31",
         "product_id": "prod-31",
-        "url": "https://steroids-uk.com/wp-content/uploads/2026/02/Cypo-Testosterone-200mg-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -1036,12 +1036,12 @@
     "is_featured": false,
     "is_on_sale": true,
     "category_id": "cat-2",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2024/05/TRT-Formula-510x510.jpg-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-32",
         "product_id": "prod-32",
-        "url": "https://steroids-uk.com/wp-content/uploads/2024/05/TRT-Formula-510x510.jpg-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -1069,12 +1069,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-2",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2022/03/PROPER-ENAN-300-scaled-1-150x150.webp",
+    "primary_image": "/assets/images/imgi_20_PROPER-ENAN-300-scaled-.webp",
     "images": [
       {
         "id": "img-33",
         "product_id": "prod-33",
-        "url": "https://steroids-uk.com/wp-content/uploads/2022/03/PROPER-ENAN-300-scaled-1-150x150.webp",
+        "url": "/assets/images/imgi_20_PROPER-ENAN-300-scaled-.webp",
         "position": 0,
         "is_primary": true
       }
@@ -1102,12 +1102,12 @@
     "is_featured": false,
     "is_on_sale": true,
     "category_id": "cat-2",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2025/10/Test-E-5-1-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-34",
         "product_id": "prod-34",
-        "url": "https://steroids-uk.com/wp-content/uploads/2025/10/Test-E-5-1-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -1135,12 +1135,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-2-3",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2025/07/Tren-E-5-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-35",
         "product_id": "prod-35",
-        "url": "https://steroids-uk.com/wp-content/uploads/2025/07/Tren-E-5-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -1168,12 +1168,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-2-3",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2024/01/PROPER-TREN-A-100-scaled-1-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-36",
         "product_id": "prod-36",
-        "url": "https://steroids-uk.com/wp-content/uploads/2024/01/PROPER-TREN-A-100-scaled-1-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -1201,12 +1201,12 @@
     "is_featured": false,
     "is_on_sale": true,
     "category_id": "cat-1",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2026/01/steroids-ukcom-thex-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-37",
         "product_id": "prod-37",
-        "url": "https://steroids-uk.com/wp-content/uploads/2026/01/steroids-ukcom-thex-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -1234,12 +1234,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-2-3",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2026/01/steroids-ukcom-tritren150-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-38",
         "product_id": "prod-38",
-        "url": "https://steroids-uk.com/wp-content/uploads/2026/01/steroids-ukcom-tritren150-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -1267,12 +1267,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-2-3",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2025/03/Tren-A-5-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-39",
         "product_id": "prod-39",
-        "url": "https://steroids-uk.com/wp-content/uploads/2025/03/Tren-A-5-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -1300,12 +1300,12 @@
     "is_featured": false,
     "is_on_sale": true,
     "category_id": "cat-2",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2023/12/drostanolone-p-100-2-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-40",
         "product_id": "prod-40",
-        "url": "https://steroids-uk.com/wp-content/uploads/2023/12/drostanolone-p-100-2-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -1333,12 +1333,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-2",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2024/01/PROPER-MASTER-P-100-scaled-1-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-41",
         "product_id": "prod-41",
-        "url": "https://steroids-uk.com/wp-content/uploads/2024/01/PROPER-MASTER-P-100-scaled-1-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -1366,12 +1366,12 @@
     "is_featured": false,
     "is_on_sale": true,
     "category_id": "cat-2",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2025/03/Dros-P-5-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-42",
         "product_id": "prod-42",
-        "url": "https://steroids-uk.com/wp-content/uploads/2025/03/Dros-P-5-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -1399,12 +1399,12 @@
     "is_featured": false,
     "is_on_sale": true,
     "category_id": "cat-2",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2023/12/drostanolone-e-1-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-43",
         "product_id": "prod-43",
-        "url": "https://steroids-uk.com/wp-content/uploads/2023/12/drostanolone-e-1-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -1432,12 +1432,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-2",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2025/07/Dros-E-5-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-44",
         "product_id": "prod-44",
-        "url": "https://steroids-uk.com/wp-content/uploads/2025/07/Dros-E-5-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -1465,12 +1465,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-2",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2026/01/steroids-ukcom-drosta-enan200-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-45",
         "product_id": "prod-45",
-        "url": "https://steroids-uk.com/wp-content/uploads/2026/01/steroids-ukcom-drosta-enan200-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -1498,12 +1498,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-2",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2024/01/PROPER-MASTER-E-200-scaled-1-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-46",
         "product_id": "prod-46",
-        "url": "https://steroids-uk.com/wp-content/uploads/2024/01/PROPER-MASTER-E-200-scaled-1-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -1531,12 +1531,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-2-3",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2025/11/Quant-Equipoise-300mg-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-47",
         "product_id": "prod-47",
-        "url": "https://steroids-uk.com/wp-content/uploads/2025/11/Quant-Equipoise-300mg-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -1564,12 +1564,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-2-5",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2026/02/NPP-beligas100mg-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-48",
         "product_id": "prod-48",
-        "url": "https://steroids-uk.com/wp-content/uploads/2026/02/NPP-beligas100mg-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -1597,12 +1597,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-2-5",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2026/01/steroids-ukcom-npp100-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-49",
         "product_id": "prod-49",
-        "url": "https://steroids-uk.com/wp-content/uploads/2026/01/steroids-ukcom-npp100-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -1630,12 +1630,12 @@
     "is_featured": false,
     "is_on_sale": true,
     "category_id": "cat-2",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2024/01/PROPER-TESTMIX5-400-scaled-1-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-50",
         "product_id": "prod-50",
-        "url": "https://steroids-uk.com/wp-content/uploads/2024/01/PROPER-TESTMIX5-400-scaled-1-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -1663,12 +1663,12 @@
     "is_featured": false,
     "is_on_sale": true,
     "category_id": "cat-2",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2026/01/steroids-ukcom-sustanon300-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-51",
         "product_id": "prod-51",
-        "url": "https://steroids-uk.com/wp-content/uploads/2026/01/steroids-ukcom-sustanon300-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -1696,12 +1696,12 @@
     "is_featured": false,
     "is_on_sale": true,
     "category_id": "cat-2",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2024/05/Testosterone-AQ-50-510x510.jpg-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-52",
         "product_id": "prod-52",
-        "url": "https://steroids-uk.com/wp-content/uploads/2024/05/Testosterone-AQ-50-510x510.jpg-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -1729,12 +1729,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-1",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2025/11/26_thymosin-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-53",
         "product_id": "prod-53",
-        "url": "https://steroids-uk.com/wp-content/uploads/2025/11/26_thymosin-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -1762,12 +1762,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-8",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2022/03/kamagra-effervescent-100mg-tablets-1-500x500-1-300x300.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-1",
         "product_id": "prod-1",
-        "url": "https://steroids-uk.com/wp-content/uploads/2022/03/kamagra-effervescent-100mg-tablets-1-500x500-1-300x300.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -1795,12 +1795,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-8",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2017/11/Super-Kamagra-300x300.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-2",
         "product_id": "prod-2",
-        "url": "https://steroids-uk.com/wp-content/uploads/2017/11/Super-Kamagra-300x300.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -1828,12 +1828,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-8",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2026/01/cialis-300x300.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-3",
         "product_id": "prod-3",
-        "url": "https://steroids-uk.com/wp-content/uploads/2026/01/cialis-300x300.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -1861,12 +1861,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-1",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2025/11/prilimed-30_blister-300x300.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-4",
         "product_id": "prod-4",
-        "url": "https://steroids-uk.com/wp-content/uploads/2025/11/prilimed-30_blister-300x300.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -1894,12 +1894,12 @@
     "is_featured": false,
     "is_on_sale": true,
     "category_id": "cat-4",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2023/01/b-lgd-4033-ligandrol-pharmaqo-300x300.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-5",
         "product_id": "prod-5",
-        "url": "https://steroids-uk.com/wp-content/uploads/2023/01/b-lgd-4033-ligandrol-pharmaqo-300x300.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -1927,12 +1927,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-4",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2020/08/imusclesarmsuk-ligandrollgd4033_1024x1024@2x-1-300x300.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-6",
         "product_id": "prod-6",
-        "url": "https://steroids-uk.com/wp-content/uploads/2020/08/imusclesarmsuk-ligandrollgd4033_1024x1024@2x-1-300x300.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -1960,12 +1960,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-5",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2024/05/Proscalpin-1-agm22mL-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-7",
         "product_id": "prod-7",
-        "url": "https://steroids-uk.com/wp-content/uploads/2024/05/Proscalpin-1-agm22mL-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -1993,12 +1993,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-5",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2024/02/finax_1mg_tablet_30s_35081_0_1-300x300.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-8",
         "product_id": "prod-8",
-        "url": "https://steroids-uk.com/wp-content/uploads/2024/02/finax_1mg_tablet_30s_35081_0_1-300x300.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -2026,12 +2026,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-2",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2024/09/testosterone-gel-500x500-1.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-9",
         "product_id": "prod-9",
-        "url": "https://steroids-uk.com/wp-content/uploads/2024/09/testosterone-gel-500x500-1.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -2059,12 +2059,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-5-2",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2021/12/anastrazol-neola-front.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-10",
         "product_id": "prod-10",
-        "url": "https://steroids-uk.com/wp-content/uploads/2021/12/anastrazol-neola-front.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -2092,12 +2092,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-5",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2024/10/liv-52-himalaya-700x700.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-11",
         "product_id": "prod-11",
-        "url": "https://steroids-uk.com/wp-content/uploads/2024/10/liv-52-himalaya-700x700.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -2125,12 +2125,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-5-2",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2015/11/terpafen-clomifenec-citrate-50-mg-500x500-1.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-12",
         "product_id": "prod-12",
-        "url": "https://steroids-uk.com/wp-content/uploads/2015/11/terpafen-clomifenec-citrate-50-mg-500x500-1.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -2158,12 +2158,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-4",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2020/08/imusclesarmsuk-ibutamorenmk677_1024x1024@2x-700x700.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-13",
         "product_id": "prod-13",
-        "url": "https://steroids-uk.com/wp-content/uploads/2020/08/imusclesarmsuk-ibutamorenmk677_1024x1024@2x-700x700.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -2191,12 +2191,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-4",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2020/08/imusclesarmsuk-cardarinegw501516_1024x1024@2x-700x700.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-14",
         "product_id": "prod-14",
-        "url": "https://steroids-uk.com/wp-content/uploads/2020/08/imusclesarmsuk-cardarinegw501516_1024x1024@2x-700x700.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -2224,12 +2224,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-4",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2020/08/S-23_1024x1024@2x-700x700.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-15",
         "product_id": "prod-15",
-        "url": "https://steroids-uk.com/wp-content/uploads/2020/08/S-23_1024x1024@2x-700x700.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -2257,12 +2257,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-1",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2026/01/oxy-caps-V2-700x700.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-16",
         "product_id": "prod-16",
-        "url": "https://steroids-uk.com/wp-content/uploads/2026/01/oxy-caps-V2-700x700.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -2290,12 +2290,12 @@
     "is_featured": false,
     "is_on_sale": true,
     "category_id": "cat-1",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2026/01/anapolon-700x700.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-17",
         "product_id": "prod-17",
-        "url": "https://steroids-uk.com/wp-content/uploads/2026/01/anapolon-700x700.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -2323,12 +2323,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-1",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2026/02/Winstrol-Lite-Beligas-1-700x700.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-18",
         "product_id": "prod-18",
-        "url": "https://steroids-uk.com/wp-content/uploads/2026/02/Winstrol-Lite-Beligas-1-700x700.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -2356,12 +2356,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-1",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2026/01/winstrol-700x700.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-19",
         "product_id": "prod-19",
-        "url": "https://steroids-uk.com/wp-content/uploads/2026/01/winstrol-700x700.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -2389,12 +2389,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-1",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2026/01/winstrol-caps-V2-700x700.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-20",
         "product_id": "prod-20",
-        "url": "https://steroids-uk.com/wp-content/uploads/2026/01/winstrol-caps-V2-700x700.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -2422,12 +2422,12 @@
     "is_featured": false,
     "is_on_sale": true,
     "category_id": "cat-5",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2015/11/PROVIRON3-700x700.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-21",
         "product_id": "prod-21",
-        "url": "https://steroids-uk.com/wp-content/uploads/2015/11/PROVIRON3-700x700.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -2455,12 +2455,12 @@
     "is_featured": false,
     "is_on_sale": true,
     "category_id": "cat-5",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2025/05/post-cycle-therapy-pct-700x700.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-22",
         "product_id": "prod-22",
-        "url": "https://steroids-uk.com/wp-content/uploads/2025/05/post-cycle-therapy-pct-700x700.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -2488,12 +2488,12 @@
     "is_featured": false,
     "is_on_sale": true,
     "category_id": "cat-5",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2020/08/zymoplex-500x500-500x500-500x500-1.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-23",
         "product_id": "prod-23",
-        "url": "https://steroids-uk.com/wp-content/uploads/2020/08/zymoplex-500x500-500x500-500x500-1.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -2521,12 +2521,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-5",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2022/02/Nolvadex-D-AStra-700x700.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-24",
         "product_id": "prod-24",
-        "url": "https://steroids-uk.com/wp-content/uploads/2022/02/Nolvadex-D-AStra-700x700.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -2554,12 +2554,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-5",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2024/05/tamoxifen-uk.webp",
+    "primary_image": "/assets/images/imgi_152_tamoxifen-front-300x300.webp",
     "images": [
       {
         "id": "img-25",
         "product_id": "prod-25",
-        "url": "https://steroids-uk.com/wp-content/uploads/2024/05/tamoxifen-uk.webp",
+        "url": "/assets/images/imgi_152_tamoxifen-front-300x300.webp",
         "position": 0,
         "is_primary": true
       }
@@ -2587,12 +2587,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-1",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2022/05/Pro-Turinabol-10_front-1-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-26",
         "product_id": "prod-26",
-        "url": "https://steroids-uk.com/wp-content/uploads/2022/05/Pro-Turinabol-10_front-1-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -2620,12 +2620,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-1",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2023/12/pharmaqo-labs-turinabol-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-27",
         "product_id": "prod-27",
-        "url": "https://steroids-uk.com/wp-content/uploads/2023/12/pharmaqo-labs-turinabol-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -2653,12 +2653,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-1",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2022/03/pro-dianabol-10-front-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-28",
         "product_id": "prod-28",
-        "url": "https://steroids-uk.com/wp-content/uploads/2022/03/pro-dianabol-10-front-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -2686,12 +2686,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-2",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2025/07/Test-C-5-2-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-29",
         "product_id": "prod-29",
-        "url": "https://steroids-uk.com/wp-content/uploads/2025/07/Test-C-5-2-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -2719,12 +2719,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-2",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2022/03/PROPER-CYP-200-scaled-1-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-30",
         "product_id": "prod-30",
-        "url": "https://steroids-uk.com/wp-content/uploads/2022/03/PROPER-CYP-200-scaled-1-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -2752,12 +2752,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-2",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2026/02/Cypo-Testosterone-200mg-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-31",
         "product_id": "prod-31",
-        "url": "https://steroids-uk.com/wp-content/uploads/2026/02/Cypo-Testosterone-200mg-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -2785,12 +2785,12 @@
     "is_featured": false,
     "is_on_sale": true,
     "category_id": "cat-2",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2024/05/TRT-Formula-510x510.jpg-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-32",
         "product_id": "prod-32",
-        "url": "https://steroids-uk.com/wp-content/uploads/2024/05/TRT-Formula-510x510.jpg-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -2818,12 +2818,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-2",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2022/03/PROPER-ENAN-300-scaled-1-150x150.webp",
+    "primary_image": "/assets/images/imgi_20_PROPER-ENAN-300-scaled-.webp",
     "images": [
       {
         "id": "img-33",
         "product_id": "prod-33",
-        "url": "https://steroids-uk.com/wp-content/uploads/2022/03/PROPER-ENAN-300-scaled-1-150x150.webp",
+        "url": "/assets/images/imgi_20_PROPER-ENAN-300-scaled-.webp",
         "position": 0,
         "is_primary": true
       }
@@ -2851,12 +2851,12 @@
     "is_featured": false,
     "is_on_sale": true,
     "category_id": "cat-2",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2025/10/Test-E-5-1-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-34",
         "product_id": "prod-34",
-        "url": "https://steroids-uk.com/wp-content/uploads/2025/10/Test-E-5-1-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -2884,12 +2884,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-2-3",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2025/07/Tren-E-5-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-35",
         "product_id": "prod-35",
-        "url": "https://steroids-uk.com/wp-content/uploads/2025/07/Tren-E-5-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -2917,12 +2917,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-2-3",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2024/01/PROPER-TREN-A-100-scaled-1-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-36",
         "product_id": "prod-36",
-        "url": "https://steroids-uk.com/wp-content/uploads/2024/01/PROPER-TREN-A-100-scaled-1-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -2950,12 +2950,12 @@
     "is_featured": false,
     "is_on_sale": true,
     "category_id": "cat-1",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2026/01/steroids-ukcom-thex-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-37",
         "product_id": "prod-37",
-        "url": "https://steroids-uk.com/wp-content/uploads/2026/01/steroids-ukcom-thex-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -2983,12 +2983,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-2-3",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2026/01/steroids-ukcom-tritren150-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-38",
         "product_id": "prod-38",
-        "url": "https://steroids-uk.com/wp-content/uploads/2026/01/steroids-ukcom-tritren150-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -3016,12 +3016,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-2-3",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2025/03/Tren-A-5-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-39",
         "product_id": "prod-39",
-        "url": "https://steroids-uk.com/wp-content/uploads/2025/03/Tren-A-5-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -3049,12 +3049,12 @@
     "is_featured": false,
     "is_on_sale": true,
     "category_id": "cat-2",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2023/12/drostanolone-p-100-2-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-40",
         "product_id": "prod-40",
-        "url": "https://steroids-uk.com/wp-content/uploads/2023/12/drostanolone-p-100-2-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -3082,12 +3082,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-2",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2024/01/PROPER-MASTER-P-100-scaled-1-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-41",
         "product_id": "prod-41",
-        "url": "https://steroids-uk.com/wp-content/uploads/2024/01/PROPER-MASTER-P-100-scaled-1-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -3115,12 +3115,12 @@
     "is_featured": false,
     "is_on_sale": true,
     "category_id": "cat-2",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2025/03/Dros-P-5-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-42",
         "product_id": "prod-42",
-        "url": "https://steroids-uk.com/wp-content/uploads/2025/03/Dros-P-5-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -3148,12 +3148,12 @@
     "is_featured": false,
     "is_on_sale": true,
     "category_id": "cat-2",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2023/12/drostanolone-e-1-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-43",
         "product_id": "prod-43",
-        "url": "https://steroids-uk.com/wp-content/uploads/2023/12/drostanolone-e-1-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -3181,12 +3181,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-2",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2025/07/Dros-E-5-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-44",
         "product_id": "prod-44",
-        "url": "https://steroids-uk.com/wp-content/uploads/2025/07/Dros-E-5-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -3214,12 +3214,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-2",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2026/01/steroids-ukcom-drosta-enan200-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-45",
         "product_id": "prod-45",
-        "url": "https://steroids-uk.com/wp-content/uploads/2026/01/steroids-ukcom-drosta-enan200-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -3247,12 +3247,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-2",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2024/01/PROPER-MASTER-E-200-scaled-1-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-46",
         "product_id": "prod-46",
-        "url": "https://steroids-uk.com/wp-content/uploads/2024/01/PROPER-MASTER-E-200-scaled-1-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -3280,12 +3280,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-2-3",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2025/11/Quant-Equipoise-300mg-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-47",
         "product_id": "prod-47",
-        "url": "https://steroids-uk.com/wp-content/uploads/2025/11/Quant-Equipoise-300mg-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -3313,12 +3313,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-2-5",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2026/02/NPP-beligas100mg-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-48",
         "product_id": "prod-48",
-        "url": "https://steroids-uk.com/wp-content/uploads/2026/02/NPP-beligas100mg-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -3346,12 +3346,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-2-5",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2026/01/steroids-ukcom-npp100-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-49",
         "product_id": "prod-49",
-        "url": "https://steroids-uk.com/wp-content/uploads/2026/01/steroids-ukcom-npp100-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -3379,12 +3379,12 @@
     "is_featured": false,
     "is_on_sale": true,
     "category_id": "cat-2",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2024/01/PROPER-TESTMIX5-400-scaled-1-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-50",
         "product_id": "prod-50",
-        "url": "https://steroids-uk.com/wp-content/uploads/2024/01/PROPER-TESTMIX5-400-scaled-1-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -3412,12 +3412,12 @@
     "is_featured": false,
     "is_on_sale": true,
     "category_id": "cat-2",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2026/01/steroids-ukcom-sustanon300-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-51",
         "product_id": "prod-51",
-        "url": "https://steroids-uk.com/wp-content/uploads/2026/01/steroids-ukcom-sustanon300-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -3445,12 +3445,12 @@
     "is_featured": false,
     "is_on_sale": true,
     "category_id": "cat-2",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2024/05/Testosterone-AQ-50-510x510.jpg-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-52",
         "product_id": "prod-52",
-        "url": "https://steroids-uk.com/wp-content/uploads/2024/05/Testosterone-AQ-50-510x510.jpg-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }
@@ -3478,12 +3478,12 @@
     "is_featured": false,
     "is_on_sale": false,
     "category_id": "cat-1",
-    "primary_image": "https://steroids-uk.com/wp-content/uploads/2025/11/26_thymosin-150x150.webp",
+    "primary_image": "/assets/images/placeholder.svg",
     "images": [
       {
         "id": "img-53",
         "product_id": "prod-53",
-        "url": "https://steroids-uk.com/wp-content/uploads/2025/11/26_thymosin-150x150.webp",
+        "url": "/assets/images/placeholder.svg",
         "position": 0,
         "is_primary": true
       }

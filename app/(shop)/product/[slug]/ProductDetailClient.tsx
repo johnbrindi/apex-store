@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import Image from 'next/image'
+import Image from '@/components/ui/SafeImage'
 import Link from 'next/link'
 import {
   ShoppingCart, Heart, Share2, Star, Shield,
@@ -53,7 +53,7 @@ export default function ProductDetailClient({ product, related }: Props) {
 
   const images = product.images?.length
     ? product.images
-    : [{ id: 'img-0', url: product.primary_image ?? '/assets/images/placeholder.jpg', position: 0, is_primary: true, product_id: product.id }]
+    : [{ id: 'img-0', url: product.primary_image ?? '/assets/images/placeholder.svg', position: 0, is_primary: true, product_id: product.id }]
 
   const breadcrumbItems = [
     { label: 'Home', href: '/' },
@@ -72,7 +72,7 @@ export default function ProductDetailClient({ product, related }: Props) {
           {/* Main image */}
           <div className="relative aspect-square bg-surface border border-surface-100 overflow-hidden">
             <Image
-              src={images[selectedImage]?.url ?? '/assets/images/placeholder.jpg'}
+              src={images[selectedImage]?.url ?? '/assets/images/placeholder.svg'}
               alt={product.name}
               fill
               className="object-cover"

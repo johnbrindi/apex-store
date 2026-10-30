@@ -3,6 +3,7 @@
 import { cookies } from 'next/headers';
 import { createHash } from 'crypto';
 import { createClient } from '@/utils/supabase/server';
+import { encodeSession, getSessionUser, SESSION_COOKIE, SESSION_MAX_AGE } from '@/lib/session';
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -12,31 +13,20 @@ function hashPw(password: string): string {
     .digest('hex');
 }
 
-function encode(obj: object): string {
-  return Buffer.from(JSON.stringify(obj)).toString('base64url');
-}
-
-function decode(token: string): any {
-  try {
-    return JSON.parse(Buffer.from(token, 'base64url').toString('utf8'));
-  } catch {
-    return null;
-  }
-}
-
 function setAuthCookie(user: object) {
-  cookies().set('auth_token', encode(user), {
+  cookies().set(SESSION_COOKIE, encodeSession(user), {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'lax',
     path: '/',
-    maxAge: 60 * 60 * 24 * 7, // 7 days
+    maxAge: SESSION_MAX_AGE,
   });
 }
 
 // ─── Admin credentials ────────────────────────────────────────────────────────
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL ?? 'admin@system.com';
-const ADMIN_HASH  = hashPw(process.env.ADMIN_PASSWORD ?? 'anyoda12');
+// No fallback password: if ADMIN_PASSWORD is unset, admin login is disabled.
+const ADMIN_HASH  = process.env.ADMIN_PASSWORD ? hashPw(process.env.ADMIN_PASSWORD) : null;
 
 // ─── Register ─────────────────────────────────────────────────────────────────
 // Saves user to Supabase auth.users (and auto-creates profile via DB trigger)
@@ -97,7 +87,7 @@ export async function loginLocalUser(formData: FormData) {
 
     // ── Admin check (hardcoded, no DB needed) ────────────────────────────────
     if (email === ADMIN_EMAIL) {
-      if (hashPw(password) !== ADMIN_HASH) {
+      if (!ADMIN_HASH || hashPw(password) !== ADMIN_HASH) {
         return { error: 'Invalid email or password.' };
       }
       const adminUser = { id: 'admin-001', username: 'Admin', email: ADMIN_EMAIL, role: 'admin' };
@@ -137,16 +127,14 @@ export async function logoutLocalUser() {
   } catch {
     // Ignore if no Supabase session
   }
-  cookies().delete('auth_token');
+  cookies().delete(SESSION_COOKIE);
   return { success: true };
 }
 
 // ─── Get current user from cookie ─────────────────────────────────────────────
 
 export async function getLocalUser() {
-  const token = cookies().get('auth_token')?.value;
-  if (!token) return null;
-  return decode(token);
+  return getSessionUser();
 }
 
 // ─── Admin guard ──────────────────────────────────────────────────────────────

@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
+import Image from '@/components/ui/SafeImage'
 import { Heart, ShoppingCart, Trash2, ArrowRight } from 'lucide-react'
 import { useWishlistStore } from '@/store/wishlistStore'
 import { useCartStore } from '@/store/cartStore'
@@ -50,7 +50,7 @@ export default function WishlistPage() {
               {/* Image */}
               <Link href={`/product/${product.slug}`} className="block aspect-square overflow-hidden bg-dark">
                 <Image
-                  src={product.primary_image ?? '/assets/images/placeholder.jpg'}
+                  src={product.primary_image ?? '/assets/images/placeholder.svg'}
                   alt={product.name}
                   width={300}
                   height={300}

@@ -1,19 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createAdminClient } from '@/utils/supabase/admin'
-import { cookies } from 'next/headers'
-
-function getAuthCookie() {
-  const token = cookies().get('auth_token')?.value
-  if (!token) return null
-  try { return JSON.parse(Buffer.from(token, 'base64url').toString('utf8')) } catch { return null }
-}
+import { getAdminUser } from '@/lib/session'
 
 export async function PATCH(
   request: NextRequest,
   { params }: { params: { orderId: string } }
 ) {
-  const user = getAuthCookie()
-  if (!user || user.role !== 'admin') {
+  if (!getAdminUser()) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 

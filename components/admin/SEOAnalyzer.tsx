@@ -179,7 +179,7 @@ export default function SEOAnalyzer({
         const plainContent = stripHtml(content)
         const totalWords = countWords(plainContent)
         // First 10% slice used for intro keyword detection below
-        const keywordInFirstTenth = kw && plainContent.toLowerCase().split(/\s+/).slice(0, Math.ceil(totalWords * 0.1)).join(' ').includes(kw)
+        const keywordInFirstTenth = !!kw && plainContent.toLowerCase().split(/\s+/).slice(0, Math.ceil(totalWords * 0.1)).join(' ').includes(kw)
 
         // ── Basic SEO ──────────────────────────────────────
         const kwInTitle: CheckResult = (() => {

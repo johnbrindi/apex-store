@@ -235,7 +235,7 @@ export default function NewProductPage() {
           <Panel title="Product Image" icon={<ImageIcon size={14} />}>
             <Field label="Primary Image URL" hint="Paste a direct WEBP or JPG image URL.">
               <input type="url" value={primaryImage} onChange={e => setPrimaryImage(e.target.value)}
-                placeholder="https://steroids-uk.com/wp-content/uploads/..." className={inputBase} />
+                placeholder="/assets/images/your-image.webp" className={inputBase} />
             </Field>
             {primaryImage && (
               <div className="mt-2 w-24 h-24 rounded-sm border overflow-hidden bg-white/5" style={{ borderColor: 'rgba(255,255,255,0.1)' }}>

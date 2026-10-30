@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
+import Image from '@/components/ui/SafeImage'
 import { Plus, Search, Filter, Edit2, Trash2, Eye, ChevronUp, ChevronDown } from 'lucide-react'
 import { formatCurrency, cn } from '@/lib/utils'
 import ProductModal from '@/components/admin/ProductModal'
@@ -184,7 +184,7 @@ export default function AdminProductsPage() {
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-sm border overflow-hidden shrink-0 bg-white/5" style={{ borderColor: 'rgba(255,255,255,0.08)' }}>
-                        <Image src={product.primary_image ?? '/assets/images/placeholder.jpg'} alt={product.name} width={40} height={40} className="w-full h-full object-contain" />
+                        <Image src={product.primary_image ?? '/assets/images/placeholder.svg'} alt={product.name} width={40} height={40} className="w-full h-full object-contain" />
                       </div>
                       <div className="min-w-0">
                         <p className="font-semibold text-white/80 truncate max-w-[200px]">{product.name}</p>

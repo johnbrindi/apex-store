@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
+import Image from '@/components/ui/SafeImage'
 import { Minus, Plus, Trash2, ShoppingBag, ArrowRight, Tag } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useCartStore } from '@/store/cartStore'
@@ -102,7 +102,7 @@ export default function CartPage() {
                 <div className="flex items-center gap-4">
                   <Link href={`/product/${item.product.slug}`} className="shrink-0 w-20 h-20 bg-surface border border-surface-100 overflow-hidden">
                     <Image
-                      src={item.product.primary_image ?? '/assets/images/placeholder.jpg'}
+                      src={item.product.primary_image ?? '/assets/images/placeholder.svg'}
                       alt={item.product.name}
                       width={80}
                       height={80}
